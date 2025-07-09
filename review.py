@@ -1,45 +1,38 @@
 import streamlit as st
 import json
+import os
 import base64
+from dotenv import load_dotenv
 from datetime import datetime
 import google.generativeai as genai
 from PIL import Image
 import io
 import pandas as pd
-import os
-from dotenv import load_dotenv
+import nomic
+from nomic import embed
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Retrieve the API key from the environment variables
-api_key = os.getenv("GEMINI_API_KEY")
-
-if not api_key:
-    raise ValueError("API key not found. Please set GEMINI_API_KEY in your .env file.")
-
-# Configure Gemini API with API key
-genai.configure(api_key=api_key)
-
+load_dotenv()  # Load environment variables from .env file
 # Initialize Streamlit app
-st.title("Khapey")
+st.title("PakFoodie: Food Review App")
 st.write("Upload food images, write a review, and rate your experience for restaurants in Pakistan!")
+
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 # List available models for debugging
 st.subheader("Available Models")
 try:
     models = genai.list_models()
     model_list = [model.name for model in models if 'generateContent' in model.supported_generation_methods]
-    st.write("Supported models for generateContent:", model_list)
+    st.write("Supported Gemini models for generateContent:", model_list)
 except Exception as e:
-    st.error(f"Error listing models: {str(e)}")
+    st.error(f"Error listing Gemini models: {str(e)}")
 
-# Use the correct model ID
+# Use the correct Gemini model ID
 model = genai.GenerativeModel('gemini-2.5-flash-lite-preview-06-17')
 
 # Define the Gemini API prompt
 GEMINI_PROMPT = """
-You are an advanced image and text analysis model tasked with extracting detailed information from food review images and text for a Pakistani food app called Khapey. The app focuses on both local (desi) cuisine (e.g., biryani, nihari, karahi) and international cuisines (e.g., Chinese, Italian), with cultural sensitivity to the Pakistani/Muslim community. Follow the STRICT ANALYSIS PROTOCOLS and DATA EXTRACTION MATRIX provided below to analyze the images and text. Extract as much relevant information as possible, ensuring accuracy and cultural context.
+You are an advanced image and text analysis model tasked with extracting detailed information from food review images and text for a Pakistani food app called PakFoodie. The app focuses on both local (desi) cuisine (e.g., biryani, nihari, karahi) and international cuisines (e.g., Chinese, Italian), with cultural sensitivity to the Pakistani/Muslim community. Follow the STRICT ANALYSIS PROTOCOLS and DATA EXTRACTION MATRIX provided below to analyze the images and text. Extract as much relevant information as possible, ensuring accuracy and cultural context.
 
 **STRICT ANALYSIS PROTOCOLS:**
 1. VISUAL EVIDENCE ONLY: Extract data solely from what is clearly visible in THIS image.
@@ -131,6 +124,20 @@ def encode_image(image_file):
     img.save(img_byte_arr, format=img.format)
     return img_byte_arr.getvalue(), resolution
 
+# Function to generate image embeddings using Nomic Embed Vision
+def get_image_embeddings(image_file):
+    try:
+        img = Image.open(image_file)
+        # Ensure image is in RGB format
+        if img.mode != 'RGB':
+            img = img.convert('RGB')
+        # Generate embeddings
+        embeddings = embed.image(images=[img], model='nomic-embed-vision-v1')["embeddings"][0]
+        return embeddings
+    except Exception as e:
+        st.error(f"Error generating image embeddings: {str(e)}")
+        return None
+
 # Function to call Gemini API
 def call_gemini_api(images, text, ratings, total_images):
     try:
@@ -171,6 +178,10 @@ def call_gemini_api(images, text, ratings, total_images):
                 analysis["cuisine_type"] = analysis.get("cuisine_type", "Unknown").capitalize()
                 # Ensure halal_status is present
                 analysis["halal_status"] = analysis.get("halal_status", "Unknown")
+                # Add image embeddings
+                img.seek(0)  # Reset file pointer
+                embeddings = get_image_embeddings(img)
+                analysis["embeddings"] = embeddings if embeddings else []
             # Ensure halal_mentions in text_analysis
             result["text_analysis"]["halal_mentions"] = result["text_analysis"].get("halal_mentions", "None")
             return result
@@ -225,7 +236,12 @@ if submitted:
             # Image Analysis Table
             st.subheader("Image Analysis")
             if result.get("image_analysis"):
-                image_df = pd.DataFrame(result["image_analysis"])
+                # Exclude embeddings from table for readability
+                image_data = [
+                    {k: v for k, v in item.items() if k != "embeddings"}
+                    for item in result["image_analysis"]
+                ]
+                image_df = pd.DataFrame(image_data)
                 st.table(image_df)
             
             # Text Analysis
