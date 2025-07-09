@@ -1,202 +1,176 @@
-````markdown
 # Khapey: Food Review App
 
 ## Overview
-Khapey is a Streamlit-based web application designed for a Pakistani food review platform. It allows users to submit reviews for restaurants, including 1-3 images, a text review, and 1-5 star ratings for food quality, food quantity, staff, dining experience, ambience, and overall experience. The app uses the Google Gemini 2.5 Flash-Lite preview model (`gemini-2.5-flash-lite-preview-06-17`) to analyze images and text, extracting details like cuisine type, lighting quality, and sentiment, with cultural sensitivity to the Pakistani/Muslim community. The output is a structured JSON file, displayed in the UI and available for download.
+
+**Khapey** is a Streamlit-based web application designed for a Pakistani food review platform. It allows users to submit reviews for restaurants, including 1–3 images, a text review, and 1–5 star ratings for food quality, quantity, staff, ambience, and more.
+
+It uses the **Google Gemini 2.5 Flash-Lite Preview model** (`gemini-2.5-flash-lite-preview-06-17`) to analyze images and text — extracting details like cuisine type, ambience, and sentiment — with cultural sensitivity to the **Pakistani/Muslim context**.
 
 ---
 
-## Features
-- **Image Upload**: Upload 1-3 images (JPEG or PNG) of food, ambience, or other relevant scenes.
-- **Text Review**: Write a free-text review of the dining experience.
-- **Ratings**: Provide 1-5 star ratings for food quality, food quantity, staff, dining experience, ambience, and overall experience.
-- **Gemini API Integration**: Uses the Gemini 2.5 Flash-Lite preview model to analyze images and text, extracting:
-  - **Image Analysis**: Cuisine type, lighting quality score (1-5), face/food detection, ambience, image quality (1-5), resolution, and item description.
-  - **Text Analysis**: Sentiment (positive, negative, neutral), key topics, and specific mentions (e.g., dishes, staff).
-- **Output**: Generates a JSON file with analysis results and ratings, displayed in the UI and downloadable.
-- **Cultural Sensitivity**: Ensures analysis respects Pakistani/Muslim context (e.g., halal status, cultural dining norms).
-- **Debugging**: Lists available Gemini models to verify API access.
+## ✨ Features
+
+- **Image Upload**: Upload 1–3 images (JPG/PNG) of food, ambience, or dining space.
+- **Text Review**: Write a descriptive review of your dining experience.
+- **Ratings**: Provide 1–5 star ratings for:
+  - Food Quality
+  - Food Quantity
+  - Staff
+  - Dining Experience
+  - Ambience
+  - Overall
+- **Gemini AI Integration**:
+  - Image analysis: cuisine type, spice level, ambience, halal hints, etc.
+  - Text analysis: sentiment, key topics, specific mentions.
+- **Output**: JSON-based structured response shown in the app and available for download.
+- **Cultural Sensitivity**: Reviews are interpreted with halal and cultural considerations.
+- **Model Debugging**: Lists supported Gemini models for transparency.
 
 ---
 
-## Prerequisites
+## 🛠️ Prerequisites
+
 - Python 3.8+
-- Google Gemini API key with access to `gemini-2.5-flash-lite-preview-06-17`
-- Internet connection for API calls
+- Gemini API key with access to multimodal models
+- Internet connection
 
 ---
 
 ## 🔧 Installation & Setup
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/Omair22f3651/Khapey-MVP.git
 cd Khapey-MVP
-````
+2. Create and Activate a Virtual Environment
+On Windows:
 
-### 2. Create and Activate Virtual Environment
-
-#### 🪟 On Windows (CMD or PowerShell):
-
-```bash
+bash
+Copy
+Edit
 python -m venv venv
 venv\Scripts\activate
-```
+On macOS/Linux:
 
-#### 🍎 On macOS/Linux:
-
-```bash
+bash
+Copy
+Edit
 python3 -m venv venv
 source venv/bin/activate
-```
-
-### 3. Install Dependencies
-
-```bash
+3. Install Dependencies
+bash
+Copy
+Edit
 pip install -r requirements.txt
-```
+This includes:
 
-This will install:
+streamlit
 
-* streamlit
-* google-generativeai
-* pillow
-* pandas
-* nomic
-* python-dotenv
+google-generativeai
 
-> You can inspect or modify `requirements.txt` as needed.
+pillow
 
----
+pandas
 
-### 4. Set Up Gemini API Key
+nomic
 
-#### ✅ Option A: Use `.env` file (Recommended)
+python-dotenv
 
-Create a file named `.env` in the root directory:
+4. Set Up Environment Variables
+Option A: Create a .env file (Recommended)
+Create a file named .env:
 
-```
-GEMINI_API_KEY=your-real-gemini-api-key
-```
+env
+Copy
+Edit
+GEMINI_API_KEY=your-gemini-api-key
+In review.py, make sure you have:
 
-Make sure your Python code includes:
-
-```python
+python
+Copy
+Edit
 from dotenv import load_dotenv
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-```
+Option B: Set the variable manually
+On macOS/Linux:
 
-#### 🔁 Option B: Set it as an environment variable manually
+bash
+Copy
+Edit
+export GEMINI_API_KEY=your-gemini-api-key
+On Windows CMD:
 
-##### On macOS/Linux:
+cmd
+Copy
+Edit
+set GEMINI_API_KEY=your-gemini-api-key
+On Windows PowerShell:
 
-```bash
-export GEMINI_API_KEY=your-real-gemini-api-key
-```
-
-##### On Windows (CMD):
-
-```cmd
-set GEMINI_API_KEY=your-real-gemini-api-key
-```
-
-##### On Windows (PowerShell):
-
-```powershell
-$env:GEMINI_API_KEY="your-real-gemini-api-key"
-```
-
----
-
-### 5. Run the Application
-
-```bash
+powershell
+Copy
+Edit
+$env:GEMINI_API_KEY="your-gemini-api-key"
+5. Run the App
+bash
+Copy
+Edit
 streamlit run review.py
-```
+Open http://localhost:8501 in your browser.
 
-This will launch the app at:
-📍 `http://localhost:8501`
+🧠 How Gemini is Used
+The app sends a structured prompt and multimodal content (text + images) to the Gemini API.
 
----
+Gemini returns a structured response including:
 
-### 🧹 Optional: Freeze Dependencies
+image_analysis: details like cuisine, lighting, ambience
 
-If you add or update packages, update the requirements with:
+text_analysis: sentiment, key topics, halal mentions
 
-```bash
-pip freeze > requirements.txt
-```
+ratings: your given input
 
----
+timestamp: ISO format
 
-## Gemini API Prompt
+🛠️ Troubleshooting
+❌ Model Not Found
+Ensure your key supports gemini-2.5-flash-lite-preview-06-17.
 
-The app uses a detailed prompt to instruct the Gemini API, ensuring:
+❌ JSON Decode Error
+If the response is wrapped in markdown:
 
-* **Strict Analysis Protocols**: Only uses visible image/text data.
-* **Data Extraction Matrix**: Extracts different data based on image type.
-* **Output Format**: Always returns clean JSON with relevant keys:
-
-  * `image_analysis[]`
-  * `text_analysis{}`
-  * `ratings{}`
-  * `timestamp`
-
----
-
-## Troubleshooting
-
-### ❌ Error: Model Not Found
-
-* Ensure `gemini-2.5-flash-lite-preview-06-17` is listed in the "Available Models" section.
-* Verify your API key has access to Gemini multimodal preview models.
-
-### ❌ Error: JSON Parsing Failed
-
-* If Gemini returns wrapped markdown or text:
-
-````python
+python
+Copy
+Edit
 response_text = response_text.strip()
-if response_text.startswith("```json") and response_text.endswith("```"):
+if response_text.startswith("```json"):
     response_text = response_text[7:-3].strip()
-result = json.loads(response_text)
-````
+❌ Nomic Errors (for image embeddings)
+Make sure you're logged in:
 
-### ❌ API Errors
+bash
+Copy
+Edit
+nomic login
+Then paste the access token when prompted.
 
-* Check if your API key is valid and has correct scopes.
-* Ensure internet connection is available.
+📦 Optional: Update Requirements
+If you add new libraries:
 
-### 🖼️ Image Resolution Issues
+bash
+Copy
+Edit
+pip freeze > requirements.txt
+🛣️ Roadmap & Improvements
+Add retry logic for API failures
 
-* Make sure your uploaded files are valid `.jpg` or `.png` formats.
-* Pillow (`PIL`) is used to extract dimensions.
+Store data in a real database
 
----
+Enhance UI with charts or tables
 
-## Notes
+Support user login and saved reviews
 
-* **Model**: This uses `gemini-2.5-flash-lite-preview-06-17`, designed for low-latency multimodal tasks.
-* **Cultural Context**: Built to respect Pakistani/Muslim norms (e.g., halal detection).
-* **Security**: Do not hardcode the API key. Always use environment variables.
-* **JSON Output**: Includes extracted metadata, user input, and a UTC timestamp.
+Add support for video or audio reviews (future Gemini features)
 
----
-
-## 🚀 Future Improvements
-
-* Add retry logic for Gemini API failures.
-* Store review data to a database (PostgreSQL, Firebase, etc).
-* Enhance UI with colored or interactive tables.
-* Add video review support if Gemini adds support.
-* Enable user authentication and profile history.
-
----
-
-## 📄 License
-
-This project is for internal use and MVP purposes for the *Khapey* app.
-Ensure compliance with Google Gemini API Terms of Service.
-
-```
+📜 License
+This MVP is built for the Khapey internal prototype. Respect usage limits and terms of the Google Gemini API.
