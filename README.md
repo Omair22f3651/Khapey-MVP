@@ -1,4 +1,3 @@
-Sure! Here's the full updated `README.md` in a clean, copy-pasteable format:
 
 ---
 
