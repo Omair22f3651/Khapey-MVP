@@ -1,6 +1,3 @@
-
----
-
 ````markdown
 # Khapey: Food Review App
 
