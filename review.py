@@ -13,7 +13,7 @@ from nomic import embed
 
 load_dotenv()  # Load environment variables from .env file
 # Initialize Streamlit app
-st.title("PakFoodie: Food Review App")
+st.title("Khapey: Food Review App")
 st.write("Upload food images, write a review, and rate your experience for restaurants in Pakistan!")
 
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
@@ -32,7 +32,7 @@ model = genai.GenerativeModel('gemini-2.5-flash-lite-preview-06-17')
 
 # Define the Gemini API prompt
 GEMINI_PROMPT = """
-You are an advanced image and text analysis model tasked with extracting detailed information from food review images and text for a Pakistani food app called PakFoodie. The app focuses on both local (desi) cuisine (e.g., biryani, nihari, karahi) and international cuisines (e.g., Chinese, Italian), with cultural sensitivity to the Pakistani/Muslim community. Follow the STRICT ANALYSIS PROTOCOLS and DATA EXTRACTION MATRIX provided below to analyze the images and text. Extract as much relevant information as possible, ensuring accuracy and cultural context.
+You are an advanced image and text analysis model tasked with extracting detailed information from food review images and text for a Pakistani food app called Khapey. The app focuses on both local (desi) cuisine (e.g., biryani, nihari, karahi) and international cuisines (e.g., Chinese, Italian), with cultural sensitivity to the Pakistani/Muslim community. Follow the STRICT ANALYSIS PROTOCOLS and DATA EXTRACTION MATRIX provided below to analyze the images and text. Extract as much relevant information as possible, ensuring accuracy and cultural context.
 
 **STRICT ANALYSIS PROTOCOLS:**
 1. VISUAL EVIDENCE ONLY: Extract data solely from what is clearly visible in THIS image.
