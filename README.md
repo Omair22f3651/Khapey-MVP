@@ -1,176 +1,201 @@
-# Khapey: Food Review App
+Khapey MVP: Food Review and Search Platform
+Overview
+Khapey is a Minimum Viable Product (MVP) for a food review and discovery platform, designed to process restaurant reviews with images, analyze them using AI, and enable search and discovery of relevant reviews. The platform aligns with a client-specified algorithm for analyzing review content, calculating quality and reach, and implementing a search pipeline. This MVP integrates Google Gemini for image analysis, Qdrant Cloud for vector storage and semantic search, and Streamlit for a user-friendly web interface.
+Key Features
 
-## Overview
+Review Processing: Users can submit reviews with multiple images, which are analyzed to extract dish details, quality scores, and search metadata, adhering to a MongoDB-compatible schema and client JSON structure.
+Search & Discovery: Supports text-based search (e.g., "spicy chicken near me") with keyword matching, semantic similarity, and personalized ranking based on user preferences.
+Reach Calculation: Implements a client-defined algorithm to calculate content reach based on quality, reputation, and geographic weighting.
+Qdrant Cloud Integration: Stores review metadata and embeddings in Qdrant Cloud for scalable vector search, addressing local storage limitations.
+Streamlit Interface: Provides three tabs:
+Process Review: Submit and view review analysis.
+Search & Discovery: Search reviews with customizable user preferences.
+Algorithm Demo: Showcase the client’s algorithm components and flow.
 
-**Khapey** is a Streamlit-based web application designed for a Pakistani food review platform. It allows users to submit reviews for restaurants, including 1–3 images, a text review, and 1–5 star ratings for food quality, quantity, staff, ambience, and more.
 
-It uses the **Google Gemini 2.5 Flash-Lite Preview model** (`gemini-2.5-flash-lite-preview-06-17`) to analyze images and text — extracting details like cuisine type, ambience, and sentiment — with cultural sensitivity to the **Pakistani/Muslim context**.
 
----
+Technology Stack
 
-## ✨ Features
+Backend: Python 3.8+, Google Gemini API (image analysis), Qdrant Cloud (vector storage), Sentence Transformers (text embeddings), Nomic (image embeddings).
+Frontend: Streamlit for web interface.
+Dependencies: streamlit, google-generativeai, python-dotenv, pillow, qdrant-client, spacy, sentence-transformers, nomic, scikit-learn.
+Environment: Qdrant Cloud for vector storage, .env for configuration.
 
-- **Image Upload**: Upload 1–3 images (JPG/PNG) of food, ambience, or dining space.
-- **Text Review**: Write a descriptive review of your dining experience.
-- **Ratings**: Provide 1–5 star ratings for:
-  - Food Quality
-  - Food Quantity
-  - Staff
-  - Dining Experience
-  - Ambience
-  - Overall
-- **Gemini AI Integration**:
-  - Image analysis: cuisine type, spice level, ambience, halal hints, etc.
-  - Text analysis: sentiment, key topics, specific mentions.
-- **Output**: JSON-based structured response shown in the app and available for download.
-- **Cultural Sensitivity**: Reviews are interpreted with halal and cultural considerations.
-- **Model Debugging**: Lists supported Gemini models for transparency.
+Setup Instructions
+Prerequisites
 
----
+Python 3.8+ installed.
+A Qdrant Cloud account (cloud.qdrant.io).
+A Google Gemini API key for image analysis.
+Basic familiarity with Python and command-line tools.
 
-## 🛠️ Prerequisites
+Installation
 
-- Python 3.8+
-- Gemini API key with access to multimodal models
-- Internet connection
+Clone the Repository:
+git clone <repository-url>
+cd khapey-mvp
 
----
 
-## 🔧 Installation & Setup
+Install Dependencies:
+pip install streamlit google-generativeai python-dotenv pillow qdrant-client spacy sentence-transformers nomic scikit-learn
+python -m spacy download en_core_web_sm
 
-### 1. Clone the Repository
 
-```bash
-git clone https://github.com/Omair22f3651/Khapey-MVP.git
-cd Khapey-MVP
-2. Create and Activate a Virtual Environment
-On Windows:
+Set Up Qdrant Cloud:
 
-bash
-Copy
-Edit
-python -m venv venv
-venv\Scripts\activate
-On macOS/Linux:
+Log in to cloud.qdrant.io.
+Create a cluster (e.g., KhapeyCluster) in the free tier (1GB).
+Copy the Cluster URL (e.g., https://xyz-example.eu-central.aws.cloud.qdrant.io:6333).
+Generate an API Key in the Cluster Detail Page > API Keys tab.
+Test connectivity:curl -X GET 'https://your-cluster-url:6333' --header 'api-key: your-api-key'
 
-bash
-Copy
-Edit
-python3 -m venv venv
-source venv/bin/activate
-3. Install Dependencies
-bash
-Copy
-Edit
-pip install -r requirements.txt
-This includes:
+Expected response: {"title":"qdrant - vector search engine","version":"1.x.x"}.
 
-streamlit
 
-google-generativeai
+Configure Environment:
 
-pillow
+Create a .env file in the project root:GEMINI_API_KEY=your_gemini_api_key
+QDRANT_URL=https://your-cluster-url:6333
+QDRANT_API_KEY=your-qdrant-api-key
 
-pandas
 
-nomic
+Replace placeholders with your actual Gemini API key, Qdrant Cluster URL, and API key.
+Add .env to .gitignore to keep credentials secure.
 
-python-dotenv
 
-4. Set Up Environment Variables
-Option A: Create a .env file (Recommended)
-Create a file named .env:
+Run the Application:
+streamlit run mvp_milestone.py
 
-env
-Copy
-Edit
-GEMINI_API_KEY=your-gemini-api-key
-In review.py, make sure you have:
 
-python
-Copy
-Edit
-from dotenv import load_dotenv
-load_dotenv()
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-Option B: Set the variable manually
-On macOS/Linux:
+Access the app at http://localhost:8501 in your browser.
 
-bash
-Copy
-Edit
-export GEMINI_API_KEY=your-gemini-api-key
-On Windows CMD:
 
-cmd
-Copy
-Edit
-set GEMINI_API_KEY=your-gemini-api-key
-On Windows PowerShell:
 
-powershell
-Copy
-Edit
-$env:GEMINI_API_KEY="your-gemini-api-key"
-5. Run the App
-bash
-Copy
-Edit
-streamlit run review.py
-Open http://localhost:8501 in your browser.
+Usage
+Process Review
 
-🧠 How Gemini is Used
-The app sends a structured prompt and multimodal content (text + images) to the Gemini API.
+Tab: Process Review
+Steps:
+Enter restaurant details (e.g., name, branch, service type, bill).
+Rate user experience (food taste, ambience, staff, recommendation) using sliders.
+Add user thoughts and hashtags.
+Upload one or more images (JPEG/PNG) of food or restaurant.
+Click Process Review to analyze images, aggregate results, and store in Qdrant Cloud.
 
-Gemini returns a structured response including:
 
-image_analysis: details like cuisine, lighting, ambience
+Output:
+Quality metrics (score, reputation, reach level).
+AI analysis summary (dishes, cuisine, ingredients, or ambience details).
+Aggregated JSON output and reach calculation details in expanders.
 
-text_analysis: sentiment, key topics, halal mentions
 
-ratings: your given input
 
-timestamp: ISO format
+Search & Discovery
 
-🛠️ Troubleshooting
-❌ Model Not Found
-Ensure your key supports gemini-2.5-flash-lite-preview-06-17.
+Tab: Search & Discovery
+Steps:
+Set preferences in the Set Your Preferences form (e.g., cuisine weights, quality expectation).
+Enter a search query (e.g., "spicy chicken near me").
+View ranked results with restaurant details, dish information, and relevance scores.
 
-❌ JSON Decode Error
-If the response is wrapped in markdown:
 
-python
-Copy
-Edit
-response_text = response_text.strip()
-if response_text.startswith("```json"):
-    response_text = response_text[7:-3].strip()
-❌ Nomic Errors (for image embeddings)
-Make sure you're logged in:
+Output:
+List of reviews matching the query, sorted by relevance.
+Details include relevance score, keyword/semantic/personal/geo scores.
 
-bash
-Copy
-Edit
-nomic login
-Then paste the access token when prompted.
 
-📦 Optional: Update Requirements
-If you add new libraries:
 
-bash
-Copy
-Edit
-pip freeze > requirements.txt
-🛣️ Roadmap & Improvements
-Add retry logic for API failures
+Algorithm Demo
 
-Store data in a real database
+Tab: Algorithm Demo
+Details:
+Lists implemented features (e.g., image analysis, search pipeline).
+Outlines next steps (e.g., content moderation, engagement tracking).
+Describes the algorithm flow (review processing to search ranking).
+Shows sample results for different restaurant scenarios.
 
-Enhance UI with charts or tables
 
-Support user login and saved reviews
 
-Add support for video or audio reviews (future Gemini features)
+Project Structure
 
-📜 License
-This MVP is built for the Khapey internal prototype. Respect usage limits and terms of the Google Gemini API.
+mvp_milestone.py: Main application code with review processing, search pipeline, and Streamlit interface.
+.env: Configuration file for API keys and Qdrant Cloud URL (not in version control).
+requirements.txt (optional): List of dependencies for deployment.
+
+Algorithm Details
+
+Review Processing:
+Uses Google Gemini to analyze images, producing JSON output per the client’s specification.
+Aggregates multiple image analyses into a single JSON with fields: meta, quality, food/ambience, search, moderation.
+Stores results in Qdrant Cloud with embeddings for semantic search.
+
+
+Search Pipeline:
+Combines keyword matching (using spaCy) and semantic search (using Sentence Transformers and Qdrant).
+Ranks results with the formula:Relevance = (0.35 × Keyword Match) + (0.25 × Semantic Similarity) + (0.20 × Content Quality) + (0.15 × Personal Preference Fit) + (0.05 × Geographic Proximity).
+
+
+Reach Calculation:
+Combines quality score, reputation multiplier, and geographic weighting to determine content distribution level (Viral, High, Default, Low, Search-only).
+
+
+
+Limitations
+
+Geolocation: Uses simulated distances (5km). Real geolocation (e.g., Google Maps API) is a future enhancement.
+Image Embeddings: Falls back to text embeddings (sentence-transformers, 384 dimensions) if image embeddings (nomic-embed-vision-v1, 512 dimensions) fail.
+Qdrant Free Tier: Limited to 1GB storage, sufficient for testing but may require a paid plan for production.
+Moderation: Basic safety flags; full content moderation is planned for the next milestone.
+
+Troubleshooting
+
+Qdrant Connection Errors:
+Verify QDRANT_URL and QDRANT_API_KEY in .env.
+Check cluster status in Qdrant Cloud dashboard.
+Regenerate API key if expired or invalid.
+
+
+No Search Results:
+Ensure reviews are uploaded to populate the khapey_reviews collection.
+Test queries with keywords matching review data (e.g., "chicken", "spicy").
+
+
+Gemini API Errors:
+Confirm GEMINI_API_KEY is valid and has quota.
+
+
+Qdrant Dashboard: Access at https://your-cluster-url:6333/dashboard to inspect collections and points.
+
+Future Steps
+
+Content Moderation (Section 6):
+Implement multi-stage filtering (technical, safety, content analysis).
+Add manual review triggers and automatic rejection rules.
+
+
+Engagement Tracking (Section 3):
+Track likes, shares, and views for dynamic reach and decay.
+
+
+Personalization (Section 4):
+Enhance user profiles with interaction-based weights and decay functions.
+
+
+Geolocation:
+Integrate real geolocation for accurate geo_score calculation.
+
+
+Advertising System (Section 8):
+Implement ad inventory qualification and targeting.
+
+
+
+Development Notes
+
+Qdrant Cloud: Using the free tier for development. Monitor storage usage and consider upgrading for production.
+Security: Keep .env secure and avoid exposing API keys.
+Testing: Upload multiple reviews to test search functionality. Use diverse queries (e.g., "biryani", "family dining") to validate ranking.
+Support: Refer to Qdrant Documentation or support.qdrant.io for issues.
+
+License
+This project is for internal development and client demonstration purposes. Ensure compliance with client agreements and API usage policies (Google Gemini, Qdrant Cloud).

@@ -4,3 +4,8 @@ pandas>=2.0.0
 google-generativeai>=0.3.2
 nomic>=3.0.13
 python-dotenv>=1.0.0
+numpy<2.0
+scipy<1.14.0
+gensim<4.4
+numba<0.61
+tensorflow>=2.2
