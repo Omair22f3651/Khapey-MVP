@@ -6,6 +6,7 @@ from datetime import datetime
 import google.generativeai as genai
 from PIL import Image
 import io
+import base64
 from qdrant_client import QdrantClient
 from qdrant_client.http.models import Distance, VectorParams, PointStruct
 from nomic import embed
@@ -21,46 +22,14 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 st.set_page_config(page_title="Khapey MVP Milestone", page_icon="🍽️")
 st.title("🍽️ Khapey MVP: with Qdrant integration")
 
-# Client's EXACT JSON structure from algorithm specification
-CLIENT_PROMPT = """
-You are analyzing a food review for Khapey platform. Return ONLY this exact JSON structure:
-
-{
-  "meta": {
-    "type": "Food",
-    "processingTime": "2025-07-15T21:43:00Z"
-  },
-  "quality": {
-    "informative": 8.5,
-    "visualAppeal": 7.2,
-    "score": 78
-  },
-  "food": {
-    "dish": "Chicken Karahi",
-    "cuisine": "Pakistani",
-    "ingredients": ["chicken", "tomato", "ginger"],
-    "mealTime": "lunch"
-  },
-  "ambience": null,
-  "search": {
-    "keywords": ["chicken karahi", "family dining"],
-    "semantic": ["spicy curry", "pakistani dinner"],
-    "ingredients": ["chicken", "tomato", "ginger"]
-  },
-  "moderation": {
-    "safety": "safe",
-    "flags": []
-  }
-}
-
-Rules:
-- If image shows FOOD: populate "food", set "ambience": null
-- If image shows RESTAURANT: populate "ambience", set "food": null
-- mealTime: breakfast|lunch|dinner|snack
-- safety: safe|review|unsafe
-- score = (informative * 0.4 + visualAppeal * 0.6) * 10
-- Focus on Pakistani cuisine context
-"""
+# Load client prompt from external file
+try:
+    with open("prompt.json", "r") as f:
+        prompt_data = json.load(f)
+        CLIENT_PROMPT = prompt_data["prompt"]
+except FileNotFoundError:
+    st.error("Prompt file 'prompt.json' not found!")
+    CLIENT_PROMPT = ""
 
 class KhapeyMVP:
     def __init__(self):
@@ -74,7 +43,6 @@ class KhapeyMVP:
         
         # Initialize Qdrant collection
         try:
-            # Update Qdrant collection configuration to expect vectors of size 768.
             self.qdrant_client.recreate_collection(
                 collection_name="khapey_reviews",
                 vectors_config=VectorParams(size=768, distance=Distance.COSINE)
@@ -95,6 +63,7 @@ class KhapeyMVP:
         total_quality = 0
         individual_analyses = []
         image_embeddings = []
+        image_base64_list = []
         
         for image in images:
             # AI Analysis for each image
@@ -106,6 +75,10 @@ class KhapeyMVP:
                 embedding = self._get_image_embedding(image)
                 if embedding:
                     image_embeddings.append(embedding)
+                # Convert image to base64
+                image.seek(0)
+                img_base64 = base64.b64encode(image.read()).decode('utf-8')
+                image_base64_list.append(img_base64)
         
         # Aggregate analysis results
         if individual_analyses:
@@ -113,8 +86,8 @@ class KhapeyMVP:
             results["ai_analysis"] = aggregated_analysis
             results["quality_score"] = total_quality / len(individual_analyses)
             
-            # Store in Qdrant
-            self._store_review_in_qdrant(aggregated_analysis, review_data, image_embeddings)
+            # Store in Qdrant with base64 images
+            self._store_review_in_qdrant(aggregated_analysis, review_data, image_embeddings, image_base64_list)
         
         # Calculate reach based on client algorithm
         results["reach_calculation"] = self._calculate_reach(results, review_data)
@@ -277,19 +250,20 @@ class KhapeyMVP:
         
         return aggregated
     
-    def _store_review_in_qdrant(self, analysis, review_data, image_embeddings):
-        """Store review metadata and embedding in Qdrant"""
+    def _store_review_in_qdrant(self, analysis, review_data, image_embeddings, image_base64_list):
+        """Store review metadata, embedding, and base64 images in Qdrant"""
         try:
             # Use the first embedding or average if multiple
             embedding = np.mean(image_embeddings, axis=0) if image_embeddings else self._get_text_embedding(' '.join(analysis["search"]["semantic"]))
             
-            # Create payload with review data
+            # Create payload with review data and images
             payload = {
                 "ai_analysis": analysis,
                 "restaurantName": review_data.get("restaurantName"),
                 "branchName": review_data.get("branchName"),
                 "averageRating": review_data.get("averageRating"),
-                "location": {"lat": 0.0, "lon": 0.0}  # Simulated, replace with real geolocation
+                "location": {"lat": 0.0, "lon": 0.0},  # Simulated, replace with real geolocation
+                "images": image_base64_list  # Store base64-encoded images
             }
             
             # Store in Qdrant
@@ -356,7 +330,7 @@ class KhapeyMVP:
         }
     
     def search_reviews(self, query, user_profile, max_results=10):
-        """Search reviews using keyword and semantic matching"""
+        """Search reviews using keyword and semantic matching, returning images"""
         # Query Analysis
         doc = self.nlp(query.lower())
         keywords = [token.text for token in doc if token.is_alpha and not token.is_stop]
@@ -606,7 +580,7 @@ with tab2:
         st.success("Preferences saved!")
     
     # Search interface
-    query = st.text_input("Search for food or restaurants (e.g., 'spicy chicken near me')")
+    query = st.text_input("Search for food or restaurants (e.g., 'spicy chicken karahi')")
     if query:
         with st.spinner("Searching reviews..."):
             user_profile = st.session_state.get("user_profile", {
@@ -630,6 +604,21 @@ with tab2:
                         st.write(f"• Atmosphere: {ai_analysis['ambience']['atmosphere']}")
                     st.write(f"• Quality Score: {ai_analysis['quality']['score']}/100")
                     st.write(f"• Rating: {payload.get('averageRating', 0):.1f}/5")
+                    
+                    # Display images
+                    images = payload.get("images", [])
+                    if images:
+                        st.write("**Images:**")
+                        cols = st.columns(min(len(images), 3))  # Display up to 3 images per row
+                        for idx, img_base64 in enumerate(images):
+                            try:
+                                img_data = base64.b64decode(img_base64)
+                                img = Image.open(io.BytesIO(img_data))
+                                with cols[idx % 3]:
+                                    st.image(img, caption=f"Image {idx+1}", width=200)
+                            except Exception as e:
+                                st.warning(f"Error displaying image {idx+1}: {str(e)}")
+                    
                     with st.expander("Details"):
                         st.write(f"• Keyword Score: {result['keyword_score']:.2f}")
                         st.write(f"• Semantic Score: {result['semantic_score']:.2f}")
@@ -651,7 +640,7 @@ with tab3:
         st.write("• Unified image analysis output (aggregated)")
         st.write("• Quality score calculation")
         st.write("• Content reach algorithm")
-        st.write("• Search & discovery pipeline")
+        st.write("• Search & discovery pipeline with image retrieval")
         st.write("• MongoDB schema compatibility")
         st.write("• Client's JSON structure")
     
@@ -673,9 +662,9 @@ with tab3:
     4. Quality score is calculated as average across images.
     5. Reputation multiplier is applied.
     6. Geographic weighting is considered.
-    7. Review is stored in Qdrant Cloud with embeddings.
+    7. Review and base64-encoded images are stored in Qdrant Cloud with embeddings.
     8. Search queries are processed with keyword and semantic matching.
-    9. Results are ranked by relevance.
+    9. Results are ranked by relevance and images are displayed.
     """)
     
     # Sample data for demonstration
