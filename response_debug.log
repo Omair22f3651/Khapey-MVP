@@ -1,0 +1,718 @@
+Raw response for image_id d0bb4be4-a31b-4c56-abe0-44760a193cf4:
+```json
+[
+  {
+    "image_id": "d0bb4be4-a31b-4c56-abe0-44760a193cf4",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A plate with a large puffy bread, likely a puri, placed on top of something. On the side, there are two portions of food, one appears to be a minced meat curry and the other is a bright orange item, possibly a sweet vegetable or fruit.",
+      "confidence": 0.85,
+      "quality": 0.4,
+      "appeal_score": 0.3
+    },
+    "context": {
+      "ambiance": "none",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "puri",
+        "confidence": 0.9
+      },
+      {
+        "name": "minced meat curry",
+        "confidence": 0.7
+      },
+      {
+        "name": "sweet vegetable",
+        "confidence": 0.6
+      }
+    ],
+    "flag_type": "low_appeal",
+    "penalty_score": 20,
+    "keywords": [
+      "puri",
+      "curry",
+      "sweet",
+      "fried"
+    ],
+    "ambience_features": [],
+    "thumbnail_rank": 0.8
+  }
+]
+```
+==================================================
+Cleaned response for image_id d0bb4be4-a31b-4c56-abe0-44760a193cf4:
+[
+  {
+    "image_id": "d0bb4be4-a31b-4c56-abe0-44760a193cf4",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A plate with a large puffy bread, likely a puri, placed on top of something. On the side, there are two portions of food, one appears to be a minced meat curry and the other is a bright orange item, possibly a sweet vegetable or fruit.",
+      "confidence": 0.85,
+      "quality": 0.4,
+      "appeal_score": 0.3
+    },
+    "context": {
+      "ambiance": "none",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "puri",
+        "confidence": 0.9
+      },
+      {
+        "name": "minced meat curry",
+        "confidence": 0.7
+      },
+      {
+        "name": "sweet vegetable",
+        "confidence": 0.6
+      }
+    ],
+    "flag_type": "low_appeal",
+    "penalty_score": 20,
+    "keywords": [
+      "puri",
+      "curry",
+      "sweet",
+      "fried"
+    ],
+    "ambience_features": [],
+    "thumbnail_rank": 0.8
+  }
+]
+==================================================
+Raw response for image_id bc479117-81f1-4c32-b29d-ec4887e0f69e:
+```json
+[
+  {
+    "image_id": "bc479117-81f1-4c32-b29d-ec4887e0f69e",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up of a Pakistani dish served on a white plate. The dish features a puffy fried bread, possibly puri, placed on top of a portion of meat and vegetable curry. There are also some pieces of cooked carrots or sweet potatoes on the side. The lighting is warm and the food appears to be freshly prepared.",
+      "confidence": 0.85,
+      "quality": 0.70,
+      "appeal_score": 0.75
+    },
+    "context": {
+      "ambiance": "unknown",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "Puri",
+        "confidence": 0.90
+      },
+      {
+        "name": "Keema Curry",
+        "confidence": 0.75
+      },
+      {
+        "name": "Carrot Sabzi",
+        "confidence": 0.65
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "pakistani food",
+      "puri",
+      "keema",
+      "curry",
+      "sabzi",
+      "fried bread",
+      "traditional"
+    ],
+    "ambience_features": [],
+    "thumbnail_rank": 0.8
+  }
+]
+```
+==================================================
+Cleaned response for image_id bc479117-81f1-4c32-b29d-ec4887e0f69e:
+[
+  {
+    "image_id": "bc479117-81f1-4c32-b29d-ec4887e0f69e",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up of a Pakistani dish served on a white plate. The dish features a puffy fried bread, possibly puri, placed on top of a portion of meat and vegetable curry. There are also some pieces of cooked carrots or sweet potatoes on the side. The lighting is warm and the food appears to be freshly prepared.",
+      "confidence": 0.85,
+      "quality": 0.70,
+      "appeal_score": 0.75
+    },
+    "context": {
+      "ambiance": "unknown",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "Puri",
+        "confidence": 0.90
+      },
+      {
+        "name": "Keema Curry",
+        "confidence": 0.75
+      },
+      {
+        "name": "Carrot Sabzi",
+        "confidence": 0.65
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "pakistani food",
+      "puri",
+      "keema",
+      "curry",
+      "sabzi",
+      "fried bread",
+      "traditional"
+    ],
+    "ambience_features": [],
+    "thumbnail_rank": 0.8
+  }
+]
+==================================================
+Raw response for image_id 91e4319f-ea37-4cfa-b68f-fc480b826ddd:
+```json
+[
+  {
+    "image_id": "91e4319f-ea37-4cfa-b68f-fc480b826ddd",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A plate of food featuring a large, puffy flatbread served alongside what appears to be a minced meat dish and some pieces of cooked fruit or vegetables.",
+      "confidence": 0.85,
+      "quality": 0.3,
+      "appeal_score": 0.4
+    },
+    "context": {
+      "ambiance": "unknown",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "Puri",
+        "confidence": 0.9
+      },
+      {
+        "name": "Keema",
+        "confidence": 0.7
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "puri",
+      "keema",
+      "pakistani food",
+      "flatbread",
+      "minced meat"
+    ],
+    "ambience_features": [],
+    "thumbnail_rank": 0.8
+  }
+]
+```
+==================================================
+Cleaned response for image_id 91e4319f-ea37-4cfa-b68f-fc480b826ddd:
+[
+  {
+    "image_id": "91e4319f-ea37-4cfa-b68f-fc480b826ddd",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A plate of food featuring a large, puffy flatbread served alongside what appears to be a minced meat dish and some pieces of cooked fruit or vegetables.",
+      "confidence": 0.85,
+      "quality": 0.3,
+      "appeal_score": 0.4
+    },
+    "context": {
+      "ambiance": "unknown",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "Puri",
+        "confidence": 0.9
+      },
+      {
+        "name": "Keema",
+        "confidence": 0.7
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "puri",
+      "keema",
+      "pakistani food",
+      "flatbread",
+      "minced meat"
+    ],
+    "ambience_features": [],
+    "thumbnail_rank": 0.8
+  }
+]
+==================================================
+Raw response for image_id d791553d-4850-4d63-8c53-1307c527e3ce:
+```json
+[
+  {
+    "image_id": "d791553d-4850-4d63-8c53-1307c527e3ce",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up of a Pakistani dish featuring a golden-brown, puffed bread (puri) placed on top of what appears to be a serving of meat and vegetable curry. There are also slices of orange-colored fruit or vegetable on the side. The lighting is warm and somewhat dim, and the focus is on the food.",
+      "confidence": 0.9,
+      "quality": 0.6,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "unknown",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "puri",
+        "confidence": 0.95
+      },
+      {
+        "name": "meat curry",
+        "confidence": 0.7
+      },
+      {
+        "name": "vegetable curry",
+        "confidence": 0.6
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "puri",
+      "pakistani food",
+      "curry",
+      "indian subcontinent",
+      "breakfast",
+      "snack"
+    ],
+    "ambience_features": [
+      "warm lighting"
+    ],
+    "thumbnail_rank": 0.8
+  }
+]
+```
+==================================================
+Cleaned response for image_id d791553d-4850-4d63-8c53-1307c527e3ce:
+[
+  {
+    "image_id": "d791553d-4850-4d63-8c53-1307c527e3ce",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up of a Pakistani dish featuring a golden-brown, puffed bread (puri) placed on top of what appears to be a serving of meat and vegetable curry. There are also slices of orange-colored fruit or vegetable on the side. The lighting is warm and somewhat dim, and the focus is on the food.",
+      "confidence": 0.9,
+      "quality": 0.6,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "unknown",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "puri",
+        "confidence": 0.95
+      },
+      {
+        "name": "meat curry",
+        "confidence": 0.7
+      },
+      {
+        "name": "vegetable curry",
+        "confidence": 0.6
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "puri",
+      "pakistani food",
+      "curry",
+      "indian subcontinent",
+      "breakfast",
+      "snack"
+    ],
+    "ambience_features": [
+      "warm lighting"
+    ],
+    "thumbnail_rank": 0.8
+  }
+]
+==================================================
+Raw response for image_id 81917591-052a-4ccb-b42e-bf0106efbb6a:
+```json
+[
+  {
+    "image_id": "81917591-052a-4ccb-b42e-bf0106efbb6a",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up of a plate with what appears to be a large fried puri or bhatura, served with a side of what could be kheema (minced meat) and some apricot curry or sabzi.",
+      "confidence": 0.85,
+      "quality": 0.6,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "unknown",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "puri",
+        "confidence": 0.9
+      },
+      {
+        "name": "kheema",
+        "confidence": 0.75
+      },
+      {
+        "name": "sabzi",
+        "confidence": 0.6
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "puri",
+      "kheema",
+      "sabzi",
+      "pakistani food",
+      "fried bread",
+      "minced meat",
+      "curry"
+    ],
+    "ambience_features": [],
+    "thumbnail_rank": 0.8
+  }
+]
+```
+==================================================
+Cleaned response for image_id 81917591-052a-4ccb-b42e-bf0106efbb6a:
+[
+  {
+    "image_id": "81917591-052a-4ccb-b42e-bf0106efbb6a",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up of a plate with what appears to be a large fried puri or bhatura, served with a side of what could be kheema (minced meat) and some apricot curry or sabzi.",
+      "confidence": 0.85,
+      "quality": 0.6,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "unknown",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "puri",
+        "confidence": 0.9
+      },
+      {
+        "name": "kheema",
+        "confidence": 0.75
+      },
+      {
+        "name": "sabzi",
+        "confidence": 0.6
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "puri",
+      "kheema",
+      "sabzi",
+      "pakistani food",
+      "fried bread",
+      "minced meat",
+      "curry"
+    ],
+    "ambience_features": [],
+    "thumbnail_rank": 0.8
+  }
+]
+==================================================
+Raw response for image_id f4679049-d645-4041-b354-65356b628bb4:
+```json
+[
+  {
+    "image_id": "f4679049-d645-4041-b354-65356b628bb4",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a large, juicy cheeseburger wrapped in foil. The burger is stacked with two beef patties, melted cheese, and a sprinkle of lettuce, all on a sesame seed bun. The cheese appears to be a vibrant orange cheddar. The background is blurred, showing what looks like a casual dining environment with other people and food items.",
+      "confidence": 0.95,
+      "quality": 0.88,
+      "appeal_score": 0.85
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "mixed",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "cheeseburger",
+        "confidence": 0.98
+      },
+      {
+        "name": "burger",
+        "confidence": 0.99
+      },
+      {
+        "name": "fries",
+        "confidence": 0.30
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "cheeseburger",
+      "beef patty",
+      "melted cheese",
+      "sesame bun",
+      "fast food",
+      "street food"
+    ],
+    "ambience_features": [
+      "casual dining",
+      "food court"
+    ],
+    "thumbnail_rank": 1.0
+  }
+]
+```
+==================================================
+Cleaned response for image_id f4679049-d645-4041-b354-65356b628bb4:
+[
+  {
+    "image_id": "f4679049-d645-4041-b354-65356b628bb4",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a large, juicy cheeseburger wrapped in foil. The burger is stacked with two beef patties, melted cheese, and a sprinkle of lettuce, all on a sesame seed bun. The cheese appears to be a vibrant orange cheddar. The background is blurred, showing what looks like a casual dining environment with other people and food items.",
+      "confidence": 0.95,
+      "quality": 0.88,
+      "appeal_score": 0.85
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "mixed",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "cheeseburger",
+        "confidence": 0.98
+      },
+      {
+        "name": "burger",
+        "confidence": 0.99
+      },
+      {
+        "name": "fries",
+        "confidence": 0.30
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "cheeseburger",
+      "beef patty",
+      "melted cheese",
+      "sesame bun",
+      "fast food",
+      "street food"
+    ],
+    "ambience_features": [
+      "casual dining",
+      "food court"
+    ],
+    "thumbnail_rank": 1.0
+  }
+]
+==================================================
+Raw response for image_id 900f24c4-83e6-4e22-9a8a-9b984e9ffd1f:
+[
+  {
+    "image_id": "900f24c4-83e6-4e22-9a8a-9b984e9ffd1f",
+    "scene": "ambiance",
+    "visual": {
+      "description": "A behind-the-scenes look at a Pakistani restaurant kitchen, with chefs in white uniforms preparing food. Shelves filled with round, wooden containers are visible, suggesting they might be used for steaming or serving.",
+      "confidence": 0.95,
+      "quality": 0.85,
+      "appeal_score": 0.6
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {"name": "chef", "confidence": 0.99},
+      {"name": "tomatoes", "confidence": 0.75},
+      {"name": "kitchen", "confidence": 0.98}
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": ["kitchen", "chefs", "pakistani food", "restaurant", "preparation", "steaming", "wooden containers", "tomatoes", "behind the scenes"],
+    "ambience_features": ["warm lighting", "clean kitchen", "organized shelves"],
+    "thumbnail_rank": 1.0
+  }
+]
+==================================================
+Cleaned response for image_id 900f24c4-83e6-4e22-9a8a-9b984e9ffd1f:
+[
+  {
+    "image_id": "900f24c4-83e6-4e22-9a8a-9b984e9ffd1f",
+    "scene": "ambiance",
+    "visual": {
+      "description": "A behind-the-scenes look at a Pakistani restaurant kitchen, with chefs in white uniforms preparing food. Shelves filled with round, wooden containers are visible, suggesting they might be used for steaming or serving.",
+      "confidence": 0.95,
+      "quality": 0.85,
+      "appeal_score": 0.6
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {"name": "chef", "confidence": 0.99},
+      {"name": "tomatoes", "confidence": 0.75},
+      {"name": "kitchen", "confidence": 0.98}
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": ["kitchen", "chefs", "pakistani food", "restaurant", "preparation", "steaming", "wooden containers", "tomatoes", "behind the scenes"],
+    "ambience_features": ["warm lighting", "clean kitchen", "organized shelves"],
+    "thumbnail_rank": 1.0
+  }
+]
+==================================================
+Raw response for image_id 18f791cd-1428-4a53-bca6-b5f073cd1587:
+```json
+[
+  {
+    "image_id": "18f791cd-1428-4a53-bca6-b5f073cd1587",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a rich, spicy curry dish, likely chicken karahi, served in a stainless steel bowl. The curry is a deep reddish-orange color, with visible pieces of tender chicken. It is garnished with fresh green chilies and chopped cilantro. A portion of naan bread is visible in the lower right corner.",
+      "confidence": 0.95,
+      "quality": 0.88,
+      "appeal_score": 0.92
+    },
+    "context": {
+      "ambiance": "none",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "chicken karahi",
+        "confidence": 0.90
+      },
+      {
+        "name": "naan",
+        "confidence": 0.75
+      },
+      {
+        "name": "cilantro",
+        "confidence": 0.85
+      },
+      {
+        "name": "green chili",
+        "confidence": 0.80
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "curry",
+      "chicken",
+      "spicy",
+      "traditional",
+      "pakistani food",
+      "main course"
+    ],
+    "ambience_features": [
+      "close-up",
+      "appetizing"
+    ],
+    "thumbnail_rank": 0.85
+  }
+]
+```
+==================================================
+Cleaned response for image_id 18f791cd-1428-4a53-bca6-b5f073cd1587:
+[
+  {
+    "image_id": "18f791cd-1428-4a53-bca6-b5f073cd1587",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a rich, spicy curry dish, likely chicken karahi, served in a stainless steel bowl. The curry is a deep reddish-orange color, with visible pieces of tender chicken. It is garnished with fresh green chilies and chopped cilantro. A portion of naan bread is visible in the lower right corner.",
+      "confidence": 0.95,
+      "quality": 0.88,
+      "appeal_score": 0.92
+    },
+    "context": {
+      "ambiance": "none",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "chicken karahi",
+        "confidence": 0.90
+      },
+      {
+        "name": "naan",
+        "confidence": 0.75
+      },
+      {
+        "name": "cilantro",
+        "confidence": 0.85
+      },
+      {
+        "name": "green chili",
+        "confidence": 0.80
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "curry",
+      "chicken",
+      "spicy",
+      "traditional",
+      "pakistani food",
+      "main course"
+    ],
+    "ambience_features": [
+      "close-up",
+      "appetizing"
+    ],
+    "thumbnail_rank": 0.85
+  }
+]
+==================================================
