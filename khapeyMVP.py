@@ -21,36 +21,10 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 st.set_page_config(page_title="Khapey MVP Milestone", page_icon="🍽️")
 st.title("🍽️ Khapey MVP: with Qdrant and Multi-Modal Search")
 
-# Load client prompt
-PRODUCTION_PROMPT = """
-Khapey-Mod v1.2 — Vision-LLM for a Pakistani food platform.
-
-Return a JSON array with one object per image, using this schema:
-{
-  "image_id": string,
-  "scene": "dish_closeup" | "beverage" | "menu" | "ambiance",
-  "visual": {
-    "description": string,
-    "confidence": float,
-    "quality": float,
-    "appeal_score": float
-  },
-  "context": {
-    "ambiance": "indoor" | "outdoor" | "mixed" | "none" | "unknown",
-    "lighting": "daylight" | "warm" | "lowlight" | "mixed" | "unknown",
-    "meal_timing": "breakfast" | "lunch" | "dinner" | "tea_time" | "any" | "unknown"
-  },
-  "items": [ { "name": string, "confidence": float } ],
-  "flag_type": "none" | "low_appeal" | "poor_lighting" | "half_eaten" | "receipt" | "face" | "duplicate" | "inappropriate",
-  "penalty_score": int,
-  "keywords": [string],
-  "ambience_features": [string],
-  "thumbnail_rank": float
-}
-
-If the image shows no food/restaurant context, return [{"not_food_related": true}].
-Use Pakistani cuisine terms (e.g., 'nihari', 'biryani'). Exclude 'embedding' field from JSON output. Output only valid JSON.
-"""
+# Load client prompt from prompt.json
+with open(os.path.join(os.path.dirname(__file__), "prompt.json"), "r", encoding="utf-8") as f:
+    _prompt_data = json.load(f)
+PRODUCTION_PROMPT = _prompt_data["PRODUCTION_PROMPT"]
 
 class KhapeyMVP:
     def __init__(self):

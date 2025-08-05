@@ -610,3 +610,109 @@ Cleaned response for image_id 900f24c4-83e6-4e22-9a8a-9b984e9ffd1f:
   }
 ]
 ==================================================
+Raw response for image_id 18f791cd-1428-4a53-bca6-b5f073cd1587:
+```json
+[
+  {
+    "image_id": "18f791cd-1428-4a53-bca6-b5f073cd1587",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a rich, spicy curry dish, likely chicken karahi, served in a stainless steel bowl. The curry is a deep reddish-orange color, with visible pieces of tender chicken. It is garnished with fresh green chilies and chopped cilantro. A portion of naan bread is visible in the lower right corner.",
+      "confidence": 0.95,
+      "quality": 0.88,
+      "appeal_score": 0.92
+    },
+    "context": {
+      "ambiance": "none",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "chicken karahi",
+        "confidence": 0.90
+      },
+      {
+        "name": "naan",
+        "confidence": 0.75
+      },
+      {
+        "name": "cilantro",
+        "confidence": 0.85
+      },
+      {
+        "name": "green chili",
+        "confidence": 0.80
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "curry",
+      "chicken",
+      "spicy",
+      "traditional",
+      "pakistani food",
+      "main course"
+    ],
+    "ambience_features": [
+      "close-up",
+      "appetizing"
+    ],
+    "thumbnail_rank": 0.85
+  }
+]
+```
+==================================================
+Cleaned response for image_id 18f791cd-1428-4a53-bca6-b5f073cd1587:
+[
+  {
+    "image_id": "18f791cd-1428-4a53-bca6-b5f073cd1587",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a rich, spicy curry dish, likely chicken karahi, served in a stainless steel bowl. The curry is a deep reddish-orange color, with visible pieces of tender chicken. It is garnished with fresh green chilies and chopped cilantro. A portion of naan bread is visible in the lower right corner.",
+      "confidence": 0.95,
+      "quality": 0.88,
+      "appeal_score": 0.92
+    },
+    "context": {
+      "ambiance": "none",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "chicken karahi",
+        "confidence": 0.90
+      },
+      {
+        "name": "naan",
+        "confidence": 0.75
+      },
+      {
+        "name": "cilantro",
+        "confidence": 0.85
+      },
+      {
+        "name": "green chili",
+        "confidence": 0.80
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "curry",
+      "chicken",
+      "spicy",
+      "traditional",
+      "pakistani food",
+      "main course"
+    ],
+    "ambience_features": [
+      "close-up",
+      "appetizing"
+    ],
+    "thumbnail_rank": 0.85
+  }
+]
+==================================================
