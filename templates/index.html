@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khapey - Food Review Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold text-center mb-6">Khapey - Food Review Platform</h1>
+        
+        <!-- Tabs -->
+        <div class="flex justify-center mb-4">
+            <button class="px-4 py-2 bg-blue-500 text-white rounded-l-lg" onclick="showTab('review')">Review Submission</button>
+            <button class="px-4 py-2 bg-gray-300 text-gray-800 rounded-r-lg" onclick="showTab('search')">Search & Discovery</button>
+        </div>
+
+        <!-- Review Submission Form -->
+        <div id="review" class="tab-content">
+            <h2 class="text-2xl font-semibold mb-4">Submit a Review</h2>
+            <form id="reviewForm" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md">
+                <div class="mb-4">
+                    <label class="block text-gray-700">Restaurant Name</label>
+                    <input type="text" name="restaurant_name" class="w-full p-2 border rounded" value="Karachi Darbar">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Branch Name</label>
+                    <input type="text" name="branch_name" class="w-full p-2 border rounded" value="DHA Branch">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Service Type</label>
+                    <select name="service_type" class="w-full p-2 border rounded">
+                        <option value="dineIn">Dine-In</option>
+                        <option value="takeaway">Takeaway</option>
+                        <option value="delivery">Delivery</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Total Bill (PKR)</label>
+                    <input type="number" name="total_bill" class="w-full p-2 border rounded" value="1500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Food Taste (1-5)</label>
+                    <input type="number" name="food_taste" class="w-full p-2 border rounded" min="1" max="5" value="4">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Ambience (1-5)</label>
+                    <input type="number" name="ambience" class="w-full p-2 border rounded" min="1" max="5" value="4">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Staff (1-5)</label>
+                    <input type="number" name="staff" class="w-full p-2 border rounded" min="1" max="5" value="3">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Will Recommend (1-5)</label>
+                    <input type="number" name="will_recommend" class="w-full p-2 border rounded" min="1" max="5" value="4">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Your Thoughts</label>
+                    <textarea name="user_thoughts" class="w-full p-2 border rounded">Amazing chicken karahi with perfect spice level!</textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Hashtags (space-separated)</label>
+                    <input type="text" name="hashtags" class="w-full p-2 border rounded" value="#karahi #spicy #family">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Upload Images</label>
+                    <input type="file" name="images" multiple class="w-full p-2 border rounded">
+                </div>
+                <button type="button" onclick="submitReview()" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Submit Review</button>
+            </form>
+            <div id="reviewResult" class="mt-4"></div>
+        </div>
+
+        <!-- Search Form -->
+        <div id="search" class="tab-content hidden">
+            <h2 class="text-2xl font-semibold mb-4">Search Reviews</h2>
+            <form id="searchForm" class="bg-white p-6 rounded-lg shadow-md">
+                <div class="mb-4">
+                    <label class="block text-gray-700">Search Query</label>
+                    <input type="text" name="query" class="w-full p-2 border rounded" placeholder="e.g., spicy biryani">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Cuisine Preferences</label>
+                    <div class="flex space-x-4">
+                        <div>
+                            <label class="block text-gray-600">Pakistani</label>
+                            <input type="number" name="pakistani_cuisine" class="w-full p-2 border rounded" min="0" max="1" step="0.1" value="0.5">
+                        </div>
+                        <div>
+                            <label class="block text-gray-600">Italian</label>
+                            <input type="number" name="italian_cuisine" class="w-full p-2 border rounded" min="0" max="1" step="0.1" value="0.3">
+                        </div>
+                        <div>
+                            <label class="block text-gray-600">Chinese</label>
+                            <input type="number" name="chinese_cuisine" class="w-full p-2 border rounded" min="0" max="1" step="0.1" value="0.2">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Quality Expectation (1-10)</label>
+                    <input type="number" name="quality_expectation" class="w-full p-2 border rounded" min="1" max="10" value="7">
+                </div>
+                <button type="button" onclick="performSearch()" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Search</button>
+            </form>
+            <div id="searchResult" class="mt-4"></div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+            document.querySelectorAll('.flex button').forEach(btn => btn.classList.replace('bg-blue-500', 'bg-gray-300'));
+            document.querySelectorAll('.flex button').forEach(btn => btn.classList.replace('text-white', 'text-gray-800'));
+            document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.replace('bg-gray-300', 'bg-blue-500');
+            document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.replace('text-gray-800', 'text-white');
+        }
+
+        function submitReview() {
+            const form = document.getElementById('reviewForm');
+            const formData = new FormData(form);
+            fetch('/process_review', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('reviewResult');
+                if (data.success) {
+                    resultDiv.innerHTML = `<div class="bg-green-100 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold">Review Submitted Successfully!</h3>
+                        <p>Quality Score: ${data.results.quality_score.toFixed(2)}</p>
+                        <p>Reach Level: ${data.results.reach_calculation.reach_level}</p>
+                        <p>AI Analysis: ${JSON.stringify(data.results.ai_analysis)}</p>
+                    </div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="bg-red-100 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold">Error</h3>
+                        <p>${data.error}</p>
+                    </div>`;
+                }
+            })
+            .catch(error => {
+                document.getElementById('reviewResult').innerHTML = `<div class="bg-red-100 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold">Error</h3>
+                    <p>${error.message}</p>
+                </div>`;
+            });
+        }
+
+        function performSearch() {
+            const form = document.getElementById('searchForm');
+            const formData = new FormData(form);
+            fetch('/search', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('searchResult');
+                if (data.success) {
+                    let html = '<div class="bg-green-100 p-4 rounded-lg">';
+                    html += '<h3 class="text-lg font-semibold">Search Results</h3>';
+                    data.results.forEach(result => {
+                        const payload = result.payload;
+                        html += `<div class="border-b py-2">
+                            <p><strong>Restaurant:</strong> ${payload.restaurantName} (${payload.branchName})</p>
+                            <p><strong>Rating:</strong> ${payload.averageRating.toFixed(1)}</p>
+                            <p><strong>Relevance:</strong> ${result.relevance.toFixed(2)}</p>`;
+                        if (payload.images && payload.images.length > 0) {
+                            html += `<p><strong>Images:</strong></p>`;
+                            payload.images.forEach(img => {
+                                html += `<img src="data:image/jpeg;base64,${img}" class="w-32 h-32 object-cover inline-block m-2" />`;
+                            });
+                        }
+                        html += `<p><strong>AI Analysis:</strong> ${JSON.stringify(payload.ai_analysis)}</p>
+                        </div>`;
+                    });
+                    html += '</div>';
+                    resultDiv.innerHTML = html;
+                } else {
+                    resultDiv.innerHTML = `<div class="bg-red-100 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold">Error</h3>
+                        <p>${data.error}</p>
+                    </div>`;
+                }
+            })
+            .catch(error => {
+                document.getElementById('searchResult').innerHTML = `<div class="bg-red-100 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold">Error</h3>
+                    <p>${error.message}</p>
+                </div>`;
+            });
+        }
+    </script>
+</body>
+</html>
