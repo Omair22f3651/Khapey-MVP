@@ -716,3 +716,491 @@ Cleaned response for image_id 18f791cd-1428-4a53-bca6-b5f073cd1587:
   }
 ]
 ==================================================
+Raw response for image_id 6080c71b-4b80-4dd5-99d1-b74b154821a8:
+```json
+[
+  {
+    "image_id": "6080c71b-4b80-4dd5-99d1-b74b154821a8",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a traditional Pakistani dish, likely chicken karahi, served in a metal bowl. The dish features tender pieces of chicken coated in a rich, spiced tomato-based gravy. Sliced green chilies and fresh cilantro are used as garnishes, adding a vibrant touch. A piece of naan bread is visible in the lower right corner.",
+      "confidence": 0.95,
+      "quality": 0.92,
+      "appeal_score": 0.85
+    },
+    "context": {
+      "ambiance": "none",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "chicken karahi",
+        "confidence": 0.90
+      },
+      {
+        "name": "naan",
+        "confidence": 0.75
+      },
+      {
+        "name": "cilantro",
+        "confidence": 0.88
+      },
+      {
+        "name": "green chilies",
+        "confidence": 0.80
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "pakistani food",
+      "chicken",
+      "karahi",
+      "spicy",
+      "tomato gravy",
+      "cilantro",
+      "naan",
+      "traditional"
+    ],
+    "ambience_features": [],
+    "thumbnail_rank": 1.0
+  }
+]
+```
+==================================================
+Cleaned response for image_id 6080c71b-4b80-4dd5-99d1-b74b154821a8:
+[
+  {
+    "image_id": "6080c71b-4b80-4dd5-99d1-b74b154821a8",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a traditional Pakistani dish, likely chicken karahi, served in a metal bowl. The dish features tender pieces of chicken coated in a rich, spiced tomato-based gravy. Sliced green chilies and fresh cilantro are used as garnishes, adding a vibrant touch. A piece of naan bread is visible in the lower right corner.",
+      "confidence": 0.95,
+      "quality": 0.92,
+      "appeal_score": 0.85
+    },
+    "context": {
+      "ambiance": "none",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "chicken karahi",
+        "confidence": 0.90
+      },
+      {
+        "name": "naan",
+        "confidence": 0.75
+      },
+      {
+        "name": "cilantro",
+        "confidence": 0.88
+      },
+      {
+        "name": "green chilies",
+        "confidence": 0.80
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "pakistani food",
+      "chicken",
+      "karahi",
+      "spicy",
+      "tomato gravy",
+      "cilantro",
+      "naan",
+      "traditional"
+    ],
+    "ambience_features": [],
+    "thumbnail_rank": 1.0
+  }
+]
+==================================================
+Raw response for image_id 0de788f5-4f50-49f6-abea-02565894a300:
+```json
+[
+  {
+    "image_id": "0de788f5-4f50-49f6-abea-02565894a300",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a large, messy cheeseburger wrapped in foil. The burger has two patties, melted cheese, and appears to be topped with some kind of sauce and possibly chopped onions. The sesame seed bun is slightly golden. The burger is held in a hand, and another hand holding a similar burger is visible in the background.",
+      "confidence": 0.9,
+      "quality": 0.8,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "mixed",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "cheeseburger",
+        "confidence": 0.95
+      },
+      {
+        "name": "burger",
+        "confidence": 0.98
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "cheeseburger",
+      "fast food",
+      "sandwich",
+      "patties",
+      "cheese",
+      "messy",
+      "foil"
+    ],
+    "ambience_features": [
+      "indoor seating",
+      "casual dining"
+    ],
+    "thumbnail_rank": 0.8
+  }
+]
+```
+==================================================
+Cleaned response for image_id 0de788f5-4f50-49f6-abea-02565894a300:
+[
+  {
+    "image_id": "0de788f5-4f50-49f6-abea-02565894a300",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a large, messy cheeseburger wrapped in foil. The burger has two patties, melted cheese, and appears to be topped with some kind of sauce and possibly chopped onions. The sesame seed bun is slightly golden. The burger is held in a hand, and another hand holding a similar burger is visible in the background.",
+      "confidence": 0.9,
+      "quality": 0.8,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "mixed",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "cheeseburger",
+        "confidence": 0.95
+      },
+      {
+        "name": "burger",
+        "confidence": 0.98
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "cheeseburger",
+      "fast food",
+      "sandwich",
+      "patties",
+      "cheese",
+      "messy",
+      "foil"
+    ],
+    "ambience_features": [
+      "indoor seating",
+      "casual dining"
+    ],
+    "thumbnail_rank": 0.8
+  }
+]
+==================================================
+Raw response for image_id 6fa1cf3d-8cfb-4d2a-8134-21cdb4666e6a:
+```json
+[
+  {
+    "image_id": "6fa1cf3d-8cfb-4d2a-8134-21cdb4666e6a",
+    "scene": "ambiance",
+    "visual": {
+      "description": "The exterior of a modern burger joint called 'BRIM BIG JUICY BURGERS'. The storefront features large glass windows, a black facade with prominent white signage, and outdoor seating.",
+      "confidence": 0.95,
+      "quality": 0.85,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "outdoor",
+      "lighting": "daylight",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "burger joint",
+        "confidence": 0.9
+      },
+      {
+        "name": "coffee shop",
+        "confidence": 0.7
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "restaurant",
+      "exterior",
+      "brim",
+      "big juicy burgers",
+      "coffee",
+      "pakistani food"
+    ],
+    "ambience_features": [
+      "modern",
+      "outdoor seating",
+      "street view"
+    ],
+    "thumbnail_rank": 1.0
+  }
+]
+```
+==================================================
+Cleaned response for image_id 6fa1cf3d-8cfb-4d2a-8134-21cdb4666e6a:
+[
+  {
+    "image_id": "6fa1cf3d-8cfb-4d2a-8134-21cdb4666e6a",
+    "scene": "ambiance",
+    "visual": {
+      "description": "The exterior of a modern burger joint called 'BRIM BIG JUICY BURGERS'. The storefront features large glass windows, a black facade with prominent white signage, and outdoor seating.",
+      "confidence": 0.95,
+      "quality": 0.85,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "outdoor",
+      "lighting": "daylight",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "burger joint",
+        "confidence": 0.9
+      },
+      {
+        "name": "coffee shop",
+        "confidence": 0.7
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "restaurant",
+      "exterior",
+      "brim",
+      "big juicy burgers",
+      "coffee",
+      "pakistani food"
+    ],
+    "ambience_features": [
+      "modern",
+      "outdoor seating",
+      "street view"
+    ],
+    "thumbnail_rank": 1.0
+  }
+]
+==================================================
+Raw response for image_id 2dce49c4-d693-4c71-a573-dd56cd7e7837:
+```json
+[
+  {
+    "image_id": "2dce49c4-d693-4c71-a573-dd56cd7e7837",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a double-patty cheeseburger, generously topped with melted orange cheese and visible pickles. The burger is wrapped in aluminum foil, with a sesame seed bun. The background is blurred, showing what appears to be an indoor restaurant setting with people and kitchen equipment.",
+      "confidence": 0.95,
+      "quality": 0.88,
+      "appeal_score": 0.75
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "mixed",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "burger",
+        "confidence": 0.98
+      },
+      {
+        "name": "cheeseburger",
+        "confidence": 0.92
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "cheeseburger",
+      "fast food",
+      "double patty",
+      "cheese",
+      "pickles",
+      "sesame bun",
+      "foil wrap"
+    ],
+    "ambience_features": [
+      "indoor",
+      "restaurant"
+    ],
+    "thumbnail_rank": 1.0
+  }
+]
+```
+==================================================
+Cleaned response for image_id 2dce49c4-d693-4c71-a573-dd56cd7e7837:
+[
+  {
+    "image_id": "2dce49c4-d693-4c71-a573-dd56cd7e7837",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a double-patty cheeseburger, generously topped with melted orange cheese and visible pickles. The burger is wrapped in aluminum foil, with a sesame seed bun. The background is blurred, showing what appears to be an indoor restaurant setting with people and kitchen equipment.",
+      "confidence": 0.95,
+      "quality": 0.88,
+      "appeal_score": 0.75
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "mixed",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "burger",
+        "confidence": 0.98
+      },
+      {
+        "name": "cheeseburger",
+        "confidence": 0.92
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "cheeseburger",
+      "fast food",
+      "double patty",
+      "cheese",
+      "pickles",
+      "sesame bun",
+      "foil wrap"
+    ],
+    "ambience_features": [
+      "indoor",
+      "restaurant"
+    ],
+    "thumbnail_rank": 1.0
+  }
+]
+==================================================
+Raw response for image_id 6f86fac1-1963-4fd7-b7a9-4f4fdcf170c7:
+```json
+[
+  {
+    "image_id": "6f86fac1-1963-4fd7-b7a9-4f4fdcf170c7",
+    "scene": "beverage",
+    "visual": {
+      "description": "A hand holding a clear plastic cup filled with peach ice tea. The cup has a circular sticker with a peach logo and the text 'PEACHED ICE TEA' and 'BRIM'. A white straw is inserted into the drink. In the background, a sign with bright neon lights says 'WE SMASH IT RIGHT'. There are also some food items wrapped in foil and packets of condiments on a table.",
+      "confidence": 0.95,
+      "quality": 0.88,
+      "appeal_score": 0.75
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "peach ice tea",
+        "confidence": 0.98
+      },
+      {
+        "name": "burger",
+        "confidence": 0.65
+      },
+      {
+        "name": "ketchup packet",
+        "confidence": 0.70
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "ice tea",
+      "peach",
+      "drink",
+      "beverage",
+      "neon lights",
+      "restaurant",
+      "casual dining"
+    ],
+    "ambience_features": [
+      "modern",
+      "lit",
+      "energetic"
+    ],
+    "thumbnail_rank": 1.0
+  }
+]
+```
+==================================================
+Cleaned response for image_id 6f86fac1-1963-4fd7-b7a9-4f4fdcf170c7:
+[
+  {
+    "image_id": "6f86fac1-1963-4fd7-b7a9-4f4fdcf170c7",
+    "scene": "beverage",
+    "visual": {
+      "description": "A hand holding a clear plastic cup filled with peach ice tea. The cup has a circular sticker with a peach logo and the text 'PEACHED ICE TEA' and 'BRIM'. A white straw is inserted into the drink. In the background, a sign with bright neon lights says 'WE SMASH IT RIGHT'. There are also some food items wrapped in foil and packets of condiments on a table.",
+      "confidence": 0.95,
+      "quality": 0.88,
+      "appeal_score": 0.75
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "peach ice tea",
+        "confidence": 0.98
+      },
+      {
+        "name": "burger",
+        "confidence": 0.65
+      },
+      {
+        "name": "ketchup packet",
+        "confidence": 0.70
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "ice tea",
+      "peach",
+      "drink",
+      "beverage",
+      "neon lights",
+      "restaurant",
+      "casual dining"
+    ],
+    "ambience_features": [
+      "modern",
+      "lit",
+      "energetic"
+    ],
+    "thumbnail_rank": 1.0
+  }
+]
+==================================================

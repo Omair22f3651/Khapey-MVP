@@ -38,14 +38,19 @@ class KhapeyMVP:
         
         # Initialize Qdrant collection for 768-dimensional Nomic embeddings
         try:
-            self.qdrant_client.recreate_collection(
-                collection_name="khapey_reviews",
-                vectors_config=VectorParams(size=768, distance=Distance.COSINE)
-            )
-            print("DEBUG: Qdrant collection 'khapey_reviews' created with 768-dimensional vectors.")
+            existing = self.qdrant_client.get_collections().collections
+            if "khapey_reviews" not in [c.name for c in existing]:
+                self.qdrant_client.create_collection(
+                    collection_name="khapey_reviews",
+                    vectors_config=VectorParams(size=768, distance=Distance.COSINE)
+                )
+                print("DEBUG: Qdrant collection 'khapey_reviews' created with 768-dimensional vectors.")
+            else:
+                print("DEBUG: Qdrant collection 'khapey_reviews' already exists. Skipping creation.")
         except Exception as e:
-            st.error(f"Error creating Qdrant collection: {str(e)}")
-            print(f"DEBUG: Error creating Qdrant collection: {str(e)}")
+            st.error(f"Error checking/creating Qdrant collection: {str(e)}")
+            print(f"DEBUG: Error checking/creating Qdrant collection: {str(e)}")
+
     
     def analyze_review(self, images, review_data):
         """Process review matching MongoDB schema, aggregating all images"""
@@ -399,7 +404,7 @@ class KhapeyMVP:
         return score
 
 # Initialize MVP
-@st.experimental_singleton
+@st.cache_resource
 def get_mvp():
     print("DEBUG: Initializing MVP singleton...")
     return KhapeyMVP()
