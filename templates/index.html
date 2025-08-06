@@ -70,6 +70,10 @@
                 </div>
                 <button type="button" onclick="submitReview()" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Submit Review</button>
             </form>
+            <div id="loadingReview" class="hidden text-center mt-4">
+                <p class="text-gray-700">Processing your review...</p>
+                <div class="loader"></div>
+            </div>
             <div id="reviewResult" class="mt-4"></div>
         </div>
 
@@ -104,6 +108,10 @@
                 </div>
                 <button type="button" onclick="performSearch()" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Search</button>
             </form>
+            <div id="loadingSearch" class="hidden text-center mt-4">
+                <p class="text-gray-700">Searching for reviews...</p>
+                <div class="loader"></div>
+            </div>
             <div id="searchResult" class="mt-4"></div>
         </div>
     </div>
@@ -121,19 +129,24 @@
         function submitReview() {
             const form = document.getElementById('reviewForm');
             const formData = new FormData(form);
+            document.getElementById('loadingReview').classList.remove('hidden');
             fetch('/process_review', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
+                document.getElementById('loadingReview').classList.add('hidden');
                 const resultDiv = document.getElementById('reviewResult');
                 if (data.success) {
                     resultDiv.innerHTML = `<div class="bg-green-100 p-4 rounded-lg">
                         <h3 class="text-lg font-semibold">Review Submitted Successfully!</h3>
-                        <p>Quality Score: ${data.results.quality_score.toFixed(2)}</p>
-                        <p>Reach Level: ${data.results.reach_calculation.reach_level}</p>
-                        <p>AI Analysis: ${JSON.stringify(data.results.ai_analysis)}</p>
+                        <p><strong>Quality Score:</strong> ${data.results.quality_score.toFixed(2)}</p>
+                        <p><strong>Reach Level:</strong> ${data.results.reach_calculation.reach_level}</p>
+                        <p><strong>AI Analysis:</strong></p>
+                        <ul>
+                            ${Object.entries(data.results.ai_analysis).map(([key, value]) => `<li><strong>${key}:</strong> ${JSON.stringify(value)}</li>`).join('')}
+                        </ul>
                     </div>`;
                 } else {
                     resultDiv.innerHTML = `<div class="bg-red-100 p-4 rounded-lg">
@@ -143,6 +156,7 @@
                 }
             })
             .catch(error => {
+                document.getElementById('loadingReview').classList.add('hidden');
                 document.getElementById('reviewResult').innerHTML = `<div class="bg-red-100 p-4 rounded-lg">
                     <h3 class="text-lg font-semibold">Error</h3>
                     <p>${error.message}</p>
@@ -150,32 +164,34 @@
             });
         }
 
+        // Update search results to display images from the payload
         function performSearch() {
             const form = document.getElementById('searchForm');
             const formData = new FormData(form);
+            document.getElementById('loadingSearch').classList.remove('hidden');
             fetch('/search', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
+                document.getElementById('loadingSearch').classList.add('hidden');
                 const resultDiv = document.getElementById('searchResult');
                 if (data.success) {
                     let html = '<div class="bg-green-100 p-4 rounded-lg">';
                     html += '<h3 class="text-lg font-semibold">Search Results</h3>';
                     data.results.forEach(result => {
                         const payload = result.payload;
+                        const images = payload.images || [];
                         html += `<div class="border-b py-2">
+                            ${images.map(image => `<img src="data:image/jpeg;base64,${image}" alt="Review Image" class="w-64 h-auto mb-2 rounded-lg">`).join('')}
                             <p><strong>Restaurant:</strong> ${payload.restaurantName} (${payload.branchName})</p>
                             <p><strong>Rating:</strong> ${payload.averageRating.toFixed(1)}</p>
-                            <p><strong>Relevance:</strong> ${result.relevance.toFixed(2)}</p>`;
-                        if (payload.images && payload.images.length > 0) {
-                            html += `<p><strong>Images:</strong></p>`;
-                            payload.images.forEach(img => {
-                                html += `<img src="data:image/jpeg;base64,${img}" class="w-32 h-32 object-cover inline-block m-2" />`;
-                            });
-                        }
-                        html += `<p><strong>AI Analysis:</strong> ${JSON.stringify(payload.ai_analysis)}</p>
+                            <p><strong>Relevance:</strong> ${result.relevance.toFixed(2)}</p>
+                            <p><strong>AI Analysis:</strong></p>
+                            <ul>
+                                ${Object.entries(payload.ai_analysis).map(([key, value]) => `<li><strong>${key}:</strong> ${JSON.stringify(value)}</li>`).join('')}
+                            </ul>
                         </div>`;
                     });
                     html += '</div>';
@@ -188,6 +204,7 @@
                 }
             })
             .catch(error => {
+                document.getElementById('loadingSearch').classList.add('hidden');
                 document.getElementById('searchResult').innerHTML = `<div class="bg-red-100 p-4 rounded-lg">
                     <h3 class="text-lg font-semibold">Error</h3>
                     <p>${error.message}</p>
