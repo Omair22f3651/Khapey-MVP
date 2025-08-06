@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khapey MVP</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold text-center mb-6">🍽️ Khapey MVP: with Qdrant and Multi-Modal Search</h1>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="flex border-b">
+                <button class="tab-button px-4 py-2 font-semibold text-gray-700 border-b-2 border-transparent hover:border-blue-500" onclick="openTab('process')">📝 Process Review</button>
+                <button class="tab-button px-4 py-2 font-semibold text-gray-700 border-b-2 border-transparent hover:border-blue-500" onclick="openTab('search')">🔍 Search & Discovery</button>
+                <button class="tab-button px-4 py-2 font-semibold text-gray-700 border-b-2 border-transparent hover:border-blue-500" onclick="openTab('demo')">📊 Algorithm Demo</button>
+            </div>
+
+            <!-- Process Review Tab -->
+            <div id="process" class="tab-content hidden">
+                <h2 class="text-2xl font-semibold mb-4">Process Review (MongoDB Schema Compatible)</h2>
+                <form id="review-form" enctype="multipart/form-data" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium">Restaurant Name</label>
+                            <input type="text" name="restaurant_name" value="Karachi Darbar" class="w-full p-2 border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium">Branch Name</label>
+                            <input type="text" name="branch_name" value="DHA Branch" class="w-full p-2 border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium">Service Type</label>
+                            <select name="service_type" class="w-full p-2 border rounded">
+                                <option value="dineIn">Dine-In</option>
+                                <option value="takeAway">Takeaway</option>
+                                <option value="delivery">Delivery</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium">Total Bill (PKR)</label>
+                            <input type="number" name="total_bill" value="1500" min="0" class="w-full p-2 border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium">Food Taste (1-5)</label>
+                            <input type="range" name="food_taste" min="1" max="5" value="4" class="w-full">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium">Ambience (1-5)</label>
+                            <input type="range" name="ambience" min="1" max="5" value="4" class="w-full">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium">Staff (1-5)</label>
+                            <input type="range" name="staff" min="1" max="5" value="3" class="w-full">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium">Will Recommend (1-5)</label>
+                            <input type="range" name="will_recommend" min="1" max="5" value="4" class="w-full">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">User Thoughts</label>
+                        <textarea name="user_thoughts" class="w-full p-2 border rounded">Amazing chicken karahi with perfect spice level!</textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Hashtags</label>
+                        <input type="text" name="hashtags" value="#karahi #spicy #family" class="w-full p-2 border rounded">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Upload Images</label>
+                        <input type="file" name="images" multiple accept=".jpg,.png" class="w-full p-2 border rounded">
+                    </div>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">🚀 Process Review</button>
+                </form>
+                <div id="review-results" class="mt-4"></div>
+            </div>
+
+            <!-- Search & Discovery Tab -->
+            <div id="search" class="tab-content hidden">
+                <h2 class="text-2xl font-semibold mb-4">Search & Discovery</h2>
+                <form id="user-profile-form" class="space-y-4 mb-4">
+                    <h3 class="text-lg font-medium">Set Your Preferences</h3>
+                    <div>
+                        <label class="block text-sm font-medium">Pakistani Cuisine Preference</label>
+                        <input type="range" name="pakistani_cuisine" min="0" max="1" step="0.1" value="0.5" class="w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Italian Cuisine Preference</label>
+                        <input type="range" name="italian_cuisine" min="0" max="1" step="0.1" value="0.3" class="w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Chinese Cuisine Preference</label>
+                        <input type="range" name="chinese_cuisine" min="0" max="1" step="0.1" value="0.2" class="w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Quality Expectation (1-10)</label>
+                        <input type="range" name="quality_expectation" min="1" max="10" step="0.1" value="7.0" class="w-full">
+                    </div>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Save Preferences</button>
+                </form>
+                <form id="search-form" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium">Search Type</label>
+                        <select name="search_type" class="w-full p-2 border rounded">
+                            <option value="text">Text-to-Text</option>
+                            <option value="image">Text-to-Image</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Search Query</label>
+                        <input type="text" name="query" placeholder="e.g., spicy chicken karahi" class="w-full p-2 border rounded">
+                    </div>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Search</button>
+                </form>
+                <div id="search-results" class="mt-4"></div>
+            </div>
+
+            <!-- Algorithm Demo Tab -->
+            <div id="demo" class="tab-content hidden">
+                <h2 class="text-2xl font-semibold mb-4">Client Algorithm Demonstration</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <h3 class="text-lg font-medium">✅ Implemented:</h3>
+                        <ul class="list-disc pl-5">
+                            <li>Multi-modal (text-to-image) search with Nomic embeddings</li>
+                            <li>New production prompt schema (Khapey-Mod v1.2)</li>
+                            <li>Penalty-based ranking and content moderation</li>
+                            <li>Quality and appeal score calculation</li>
+                            <li>Search & discovery pipeline with image retrieval</li>
+                            <li>MongoDB schema compatibility</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-medium">🔄 Next Steps:</h3>
+                        <ul class="list-disc pl-5">
+                            <li>Implement engagement tracking</li>
+                            <li>Add personalization engine</li>
+                            <li>Build content moderation system</li>
+                            <li>Integrate real geolocation</li>
+                            <li>Add advertising system</li>
+                        </ul>
+                    </div>
+                </div>
+                <h3 class="text-lg font-medium mt-4">📊 Algorithm Flow</h3>
+                <p>Algorithm Flow:<br>
+                1. User uploads review with multiple images.<br>
+                2. AI analysis is performed using Gemini per the production prompt.<br>
+                3. Results are returned as a JSON array of per-image analyses.<br>
+                4. Quality score is averaged across images.<br>
+                5. Penalty multiplier is applied based on highest penalty_score.<br>
+                6. Review and base64-encoded images are stored in Qdrant with 512-d embeddings.<br>
+                7. Search queries are processed with text-to-text or text-to-image matching.<br>
+                8. Results are ranked by relevance, incorporating thumbnail_rank and penalties.</p>
+                <h3 class="text-lg font-medium mt-4">📈 Sample Algorithm Results</h3>
+                <div class="grid grid-cols-4 gap-4">
+                    <div>
+                        <h4 class="font-medium">High Quality Biryani</h4>
+                        <p>Quality: 8.5/10</p>
+                        <p>Reputation: 8.5/10</p>
+                        <p>Reach Level: Viral</p>
+                        <p>Penalty: 0</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium">Low Appeal Karahi</h4>
+                        <p>Quality: 6.5/10</p>
+                        <p>Reputation: 6.2/10</p>
+                        <p>Reach Level: High</p>
+                        <p>Penalty: 30</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium">Half-Eaten Nihari</h4>
+                        <p>Quality: 7.0/10</p>
+                        <p>Reputation: 4.5/10</p>
+                        <p>Reach Level: Low</p>
+                        <p>Penalty: 45</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium">Poor Lighting Restaurant</h4>
+                        <p>Quality: 3.0/10</p>
+                        <p>Reputation: 3.0/10</p>
+                        <p>Reach Level: Search-only</p>
+                        <p>Penalty: 35</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('border-blue-500'));
+            document.getElementById(tabName).classList.remove('hidden');
+            document.querySelector(`button[onclick="openTab('${tabName}')"]`).classList.add('border-blue-500');
+        }
+
+        document.getElementById('review-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch('/process_review', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            const resultsDiv = document.getElementById('review-results');
+            if (result.success) {
+                let html = '<h3 class="text-lg font-medium">✅ Review Processed Successfully</h3>';
+                html += '<div class="grid grid-cols-2 gap-4 mt-4">';
+                html += '<div><h4 class="font-medium">📊 Quality Metrics</h4>';
+                html += `<p>Overall Quality Score: ${result.results.quality_score.toFixed(0)}/100</p>`;
+                html += `<p>Reputation Score: ${result.results.reach_calculation.reputation_score.toFixed(2)}</p>`;
+                html += `<p>Reach Level: ${result.results.reach_calculation.reach_level}</p>`;
+                html += `<p>Penalty Multiplier: ${result.results.reach_calculation.penalty_multiplier.toFixed(2)}</p></div>`;
+                html += '<div><h4 class="font-medium">🎯 AI Analysis Summary</h4>';
+                result.results.ai_analysis.forEach((analysis, idx) => {
+                    html += `<p><strong>Image ${idx+1}</strong></p>`;
+                    html += `<p>• Scene: ${analysis.scene}</p>`;
+                    html += `<p>• Description: ${analysis.visual.description}</p>`;
+                    html += `<p>• Quality: ${analysis.visual.quality}/10</p>`;
+                    html += `<p>• Appeal Score: ${analysis.visual.appeal_score}/10</p>`;
+                    html += `<p>• Flag Type: ${analysis.flag_type}</p>`;
+                    html += `<p>• Penalty Score: ${analysis.penalty_score}</p>`;
+                    html += `<p>• Items: ${analysis.items.map(item => item.name).join(', ')}</p>`;
+                    html += `<p>• Keywords: ${analysis.keywords.join(', ')}</p>`;
+                });
+                html += '</div></div>';
+                resultsDiv.innerHTML = html;
+            } else {
+                resultsDiv.innerHTML = `<p class="text-red-500">Error: ${result.error}</p>`;
+            }
+        });
+
+        document.getElementById('search-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch('/search', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            const resultsDiv = document.getElementById('search-results');
+            if (result.success && result.results.length) {
+                let html = '<h3 class="text-lg font-medium">Search Results</h3>';
+                result.results.forEach((result, i) => {
+                    html += `<div class="mt-4"><p><strong>Result ${i+1} (Relevance: ${result.relevance.toFixed(2)})</strong></p>`;
+                    html += `<p>• Restaurant: ${result.payload.restaurantName} (${result.payload.branchName})</p>`;
+                    result.payload.ai_analysis.forEach(analysis => {
+                        html += `<p>• Scene: ${analysis.scene}</p>`;
+                        html += `<p>• Items: ${analysis.items.map(item => item.name).join(', ')}</p>`;
+                    });
+                    html += `<p>• Quality Score: ${(result.quality_score * 10).toFixed(1)}/10</p>`;
+                    html += `<p>• Rating: ${result.payload.averageRating.toFixed(1)}/5</p>`;
+                    if (result.payload.images && result.payload.images.length) {
+                        html += '<p><strong>Images:</strong></p><div class="grid grid-cols-3 gap-2">';
+                        result.payload.images.forEach((img, idx) => {
+                            html += `<img src="data:image/jpeg;base64,${img}" alt="Image ${idx+1}" class="w-48 h-48 object-cover">`;
+                        });
+                        html += '</div>';
+                    }
+                    html += `<details><summary>Details</summary>`;
+                    html += `<p>• Keyword Score: ${result.keyword_score.toFixed(2)}</p>`;
+                    html += `<p>• Semantic Score: ${result.semantic_score.toFixed(2)}</p>`;
+                    html += `<p>• Personal Fit: ${result.personal_score.toFixed(2)}</p>`;
+                    html += `<p>• Geo Score: ${result.geo_score.toFixed(2)}</p>`;
+                    html += `<p>• Thumbnail Rank: ${result.thumbnail_rank.toFixed(2)}</p></details>`;
+                    html += '</div>';
+                });
+                resultsDiv.innerHTML = html;
+            } else {
+                resultsDiv.innerHTML = '<p class="text-gray-500">No results found. Try a different query.</p>';
+            }
+        });
+
+        // Show process tab by default
+        openTab('process');
+    </script>
+</body>
+</html>
