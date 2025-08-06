@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from datetime import datetime
 import google.generativeai as genai
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 import io
 import base64
 from qdrant_client import QdrantClient
@@ -113,20 +113,26 @@ class KhapeyMVP:
         return results
     
     def _analyze_image(self, image_file):
+        image_id = str(uuid4())  # Define image_id before try block
+        logging.debug(f"Assigned image_id: {image_id}")
+        print(f"INFO: Assigned image_id: {image_id}")
         try:
             image_file.seek(0)
+            logging.debug(f"Opening image for image_id: {image_id}")
+            print(f"INFO: Opening image for image_id: {image_id}")
             img = Image.open(image_file)
             img_byte_arr = io.BytesIO()
             img.save(img_byte_arr, format='JPEG')
-            image_id = str(uuid4())
-            logging.debug(f"Analyzing image with image_id: {image_id}")
-            print(f"INFO: Analyzing image with ID: {image_id}")
+            logging.debug(f"Image converted to JPEG for image_id: {image_id}")
+            print(f"INFO: Image converted to JPEG for image_id: {image_id}")
 
             content = [
                 PRODUCTION_PROMPT + f"\nGenerate analysis for image_id: {image_id}. Ensure Pakistani cuisine terms are used (e.g., 'nihari', 'biryani').",
                 {"mime_type": "image/jpeg", "data": img_byte_arr.getvalue()}
             ]
 
+            logging.debug(f"Sending image to Gemini model for image_id: {image_id}")
+            print(f"INFO: Sending image to Gemini model for image_id: {image_id}")
             response = self.model.generate_content(content)
             response_text = response.candidates[0].content.parts[0].text.strip()
             logging.debug(f"Raw Gemini response for image_id {image_id}:\n{response_text}")
@@ -167,6 +173,12 @@ class KhapeyMVP:
             
             return result
 
+        except UnidentifiedImageError as e:
+            logging.error(f"Invalid image file for image_id {image_id}: {str(e)}")
+            print(f"ERROR: Invalid image file for image_id {image_id}: {str(e)}")
+            with open("response_debug.log", "a") as f:
+                f.write(f"Invalid image error for image_id {image_id}: {str(e)}\n{'='*50}\n")
+            return None
         except json.JSONDecodeError as e:
             logging.error(f"JSON parsing error for image_id {image_id}: {str(e)}")
             print(f"ERROR: JSON parsing error for image_id {image_id}: {str(e)}")
@@ -286,9 +298,9 @@ class KhapeyMVP:
             "reach_level": reach_level
         }
     
-    def search_reviews(self, query, user_profile, max_results=10, search_type="text"):
-        logging.debug(f"Starting search with query '{query}' and search_type '{search_type}'")
-        print(f"INFO: Starting search with query '{query}' and search_type '{search_type}'")
+    def search_reviews(self, query, user_profile, max_results=10):
+        logging.debug(f"Starting unified search with query '{query}'")
+        print(f"INFO: Starting unified search with query '{query}'")
         doc = self.nlp(query.lower())
         keywords = [token.text for token in doc if token.is_alpha and not token.is_stop]
         synonyms = self._expand_synonyms(keywords)
@@ -301,58 +313,58 @@ class KhapeyMVP:
             print("INFO: Failed to generate query embedding, returning empty results.")
             return []
         
-        if search_type == "image":
-            logging.debug("Performing text-to-image search using image embeddings.")
-            print("INFO: Performing text-to-image search using image embeddings.")
-            # Use text embedding to search against image embeddings in Qdrant
-            search_results = self.qdrant_client.search(
-                collection_name="khapey_reviews",
-                query_vector=query_embedding.tolist(),
-                limit=max_results,
-                with_payload=True
-            )
-            logging.debug(f"Retrieved {len(search_results)} text-to-image search results from Qdrant.")
-            print(f"INFO: Retrieved {len(search_results)} text-to-image search results from Qdrant.")
-        else:
-            logging.debug("Performing text-to-text search.")
-            print("INFO: Performing text-to-text search.")
-            # For text-to-text, combine semantic search with keyword matching
-            search_results = self.qdrant_client.search(
-                collection_name="khapey_reviews",
-                query_vector=query_embedding.tolist(),
-                limit=max_results,
-                with_payload=True
-            )
-            logging.debug(f"Retrieved {len(search_results)} semantic search results from Qdrant.")
-            print(f"INFO: Retrieved {len(search_results)} semantic search results from Qdrant.")
-            
-            keyword_results = []
-            for point in self.qdrant_client.scroll(
-                collection_name="khapey_reviews",
-                limit=max_results,
-                with_payload=True
-            )[0]:
-                payload = point.payload
-                ai_analysis = payload.get("ai_analysis", [])
-                review_keywords = []
-                for analysis in ai_analysis:
-                    review_keywords.extend(analysis.get("keywords", []) + [item["name"] for item in analysis.get("items", [])])
-                if any(kw in review_keywords for kw in keywords + synonyms):
-                    keyword_results.append(point)
-            logging.debug(f"Retrieved {len(keyword_results)} keyword search results.")
-            print(f"INFO: Retrieved {len(keyword_results)} keyword search results.")
-            
-            # Combine semantic and keyword results for text-to-text search
-            combined_results = []
-            seen_ids = set()
-            for result in search_results + keyword_results:
-                if result.id not in seen_ids:
-                    seen_ids.add(result.id)
-                    combined_results.append(result)
-            search_results = combined_results[:max_results]
+        # Text-to-image search using image embeddings
+        logging.debug("Performing text-to-image search using image embeddings.")
+        print("INFO: Performing text-to-image search using image embeddings.")
+        image_search_results = self.qdrant_client.search(
+            collection_name="khapey_reviews",
+            query_vector=query_embedding.tolist(),
+            limit=max_results,
+            with_payload=True
+        )
+        logging.debug(f"Retrieved {len(image_search_results)} text-to-image search results from Qdrant.")
+        print(f"INFO: Retrieved {len(image_search_results)} text-to-image search results from Qdrant.")
+        
+        # Text-to-text search with semantic and keyword matching
+        logging.debug("Performing text-to-text search.")
+        print("INFO: Performing text-to-text search.")
+        text_search_results = self.qdrant_client.search(
+            collection_name="khapey_reviews",
+            query_vector=query_embedding.tolist(),
+            limit=max_results,
+            with_payload=True
+        )
+        logging.debug(f"Retrieved {len(text_search_results)} semantic search results from Qdrant.")
+        print(f"INFO: Retrieved {len(text_search_results)} semantic search results from Qdrant.")
+        
+        keyword_results = []
+        for point in self.qdrant_client.scroll(
+            collection_name="khapey_reviews",
+            limit=max_results,
+            with_payload=True
+        )[0]:
+            payload = point.payload
+            ai_analysis = payload.get("ai_analysis", [])
+            review_keywords = []
+            for analysis in ai_analysis:
+                review_keywords.extend(analysis.get("keywords", []) + [item["name"] for item in analysis.get("items", [])])
+            if any(kw in review_keywords for kw in keywords + synonyms):
+                keyword_results.append(point)
+        logging.debug(f"Retrieved {len(keyword_results)} keyword search results.")
+        print(f"INFO: Retrieved {len(keyword_results)} keyword search results.")
+        
+        # Combine all results (text-to-image, semantic, and keyword)
+        combined_results = []
+        seen_ids = set()
+        for result in image_search_results + text_search_results + keyword_results:
+            if result.id not in seen_ids:
+                seen_ids.add(result.id)
+                combined_results.append(result)
+        logging.debug(f"Combined {len(combined_results)} unique results from text-to-image and text-to-text searches.")
+        print(f"INFO: Combined {len(combined_results)} unique results from text-to-image and text-to-text searches.")
 
         ranked_results = []
-        for result in search_results:
+        for result in combined_results[:max_results]:
             payload = result.payload
             ai_analysis = payload.get("ai_analysis", [])
             avg_quality = np.mean([a["visual"]["quality"] for a in ai_analysis]) if ai_analysis else 0
@@ -505,7 +517,6 @@ def process_review():
 def search():
     try:
         query = request.form.get('query', '')
-        search_type = request.form.get('search_type', 'text').lower()
         user_profile = {
             "cuisineWeights": {
                 "Pakistani": float(request.form.get('pakistani_cuisine', 0.5)),
@@ -521,7 +532,7 @@ def search():
             print("ERROR: Search query is required.")
             return jsonify({"success": False, "error": "Query is required"}), 400
 
-        results = mvp.search_reviews(query, user_profile, search_type=search_type)
+        results = mvp.search_reviews(query, user_profile)
         print("INFO: Search processing completed successfully.")
         return jsonify({
             "success": True,
