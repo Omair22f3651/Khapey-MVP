@@ -2,3 +2,4 @@
 env
 venv
 .env
+response_debug.log

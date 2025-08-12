@@ -5,212 +5,273 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khapey - Food Review Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .tab {
+            cursor: pointer;
+        }
+        .tab.active {
+            border-bottom: 2px solid #f97316;
+            color: #f97316;
+        }
+        .thumbnail {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+            margin: 5px;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100">
     <div class="container mx-auto p-4">
         <h1 class="text-3xl font-bold text-center mb-6">Khapey - Food Review Platform</h1>
-        
-        <!-- Tabs -->
         <div class="flex justify-center mb-4">
-            <button class="px-4 py-2 bg-blue-500 text-white rounded-l-lg" onclick="showTab('review')">Review Submission</button>
-            <button class="px-4 py-2 bg-gray-300 text-gray-800 rounded-r-lg" onclick="showTab('search')">Search & Discovery</button>
+            <div class="tab px-4 py-2 text-lg font-semibold active" onclick="showTab('review-tab')">Review Submission</div>
+            <div class="tab px-4 py-2 text-lg font-semibold" onclick="showTab('search-tab')">Search & Discovery</div>
         </div>
 
-        <!-- Review Submission Form -->
-        <div id="review" class="tab-content">
+        <!-- Review Submission Tab -->
+        <div id="review-tab" class="tab-content">
             <h2 class="text-2xl font-semibold mb-4">Submit a Review</h2>
-            <form id="reviewForm" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md">
+            <form id="review-form" enctype="multipart/form-data" class="bg-white p-6 rounded shadow-md">
                 <div class="mb-4">
-                    <label class="block text-gray-700">Restaurant Name</label>
-                    <input type="text" name="restaurant_name" class="w-full p-2 border rounded" value="Karachi Darbar">
+                    <label class="block text-sm font-medium text-gray-700">Restaurant Name</label>
+                    <input type="text" name="restaurant_name" placeholder="e.g. Karachi Darbar" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Branch Name</label>
-                    <input type="text" name="branch_name" class="w-full p-2 border rounded" value="DHA Branch">
+                    <label class="block text-sm font-medium text-gray-700">Branch Name</label>
+                    <input type="text" name="branch_name" placeholder="e.g. Johar town Branch" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Service Type</label>
-                    <select name="service_type" class="w-full p-2 border rounded">
-                        <option value="dineIn">Dine-In</option>
+                    <label class="block text-sm font-medium text-gray-700">Service Type</label>
+                    <select name="service_type" class="mt-1 block w-full p-2 border border-gray-300 rounded">
+                        <option value="dineIn" selected>Dine-In</option>
                         <option value="takeaway">Takeaway</option>
                         <option value="delivery">Delivery</option>
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Total Bill (PKR)</label>
-                    <input type="number" name="total_bill" class="w-full p-2 border rounded" value="1500">
+                    <label class="block text-sm font-medium text-gray-700">Total Bill (PKR)</label>
+                    <input type="number" name="total_bill" placeholder="e.g. 1500" min="0" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Food Taste (1-5)</label>
-                    <input type="number" name="food_taste" class="w-full p-2 border rounded" min="1" max="5" value="4">
+                    <label class="block text-sm font-medium text-gray-700">Food Taste (1-5)</label>
+                    <input type="number" name="food_taste" placeholder="e.g. 1-5" min="1" max="5" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Ambience (1-5)</label>
-                    <input type="number" name="ambience" class="w-full p-2 border rounded" min="1" max="5" value="4">
+                    <label class="block text-sm font-medium text-gray-700">Ambience (1-5)</label>
+                    <input type="number" name="ambience" placeholder="e.g. 1-5" min="1" max="5" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Staff (1-5)</label>
-                    <input type="number" name="staff" class="w-full p-2 border rounded" min="1" max="5" value="3">
+                    <label class="block text-sm font-medium text-gray-700">Staff (1-5)</label>
+                    <input type="number" name="staff" placeholder="e.g. 1-5" min="1" max="5" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Will Recommend (1-5)</label>
-                    <input type="number" name="will_recommend" class="w-full p-2 border rounded" min="1" max="5" value="4">
+                    <label class="block text-sm font-medium text-gray-700">Will Recommend (1-5)</label>
+                    <input type="number" name="will_recommend" placeholder="e.g. 1-5" min="1" max="5" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Your Thoughts</label>
-                    <textarea name="user_thoughts" class="w-full p-2 border rounded">Amazing chicken karahi with perfect spice level!</textarea>
+                    <label class="block text-sm font-medium text-gray-700">Your Thoughts</label>
+                    <textarea name="user_thoughts" class="mt-1 block w-full p-2 border border-gray-300 rounded" placeholder="Best Karahi in town" rows="4"></textarea>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Hashtags (space-separated)</label>
-                    <input type="text" name="hashtags" class="w-full p-2 border rounded" value="#karahi #spicy #family">
+                    <label class="block text-sm font-medium text-gray-700">Hashtags (space-separated)</label>
+                    <input type="text" name="hashtags" placeholder="e.g. #karahi #spicy" class="mt-1 block w-full p-2 border border-gray-300 rounded">
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Upload Images</label>
-                    <input type="file" name="images" multiple class="w-full p-2 border rounded">
+                    <label class="block text-sm font-medium text-gray-700">Upload Media (Images or Videos)</label>
+                    <input type="file" name="media" multiple accept="image/jpeg,image/png,video/mp4,video/avi,video/quicktime" class="mt-1 block w-full p-2 border border-gray-300 rounded">
                 </div>
-                <button type="button" onclick="submitReview()" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Submit Review</button>
+                <button type="submit" class="w-full bg-orange-500 text-white p-2 rounded hover:bg-orange-600">Submit Review</button>
             </form>
-            <div id="loadingReview" class="hidden text-center mt-4">
-                <p class="text-gray-700">Processing your review...</p>
-                <div class="loader"></div>
+            <div id="review-loading" class="hidden mt-4 text-center">
+                <p class="text-gray-600">Processing your review...</p>
             </div>
-            <div id="reviewResult" class="mt-4"></div>
+            <div id="review-result" class="hidden mt-4 p-4 bg-white rounded shadow-md"></div>
         </div>
 
-        <!-- Search Form -->
-        <div id="search" class="tab-content hidden">
+        <!-- Search Reviews Tab -->
+        <div id="search-tab" class="tab-content hidden">
             <h2 class="text-2xl font-semibold mb-4">Search Reviews</h2>
-            <form id="searchForm" class="bg-white p-6 rounded-lg shadow-md">
+            <form id="search-form" class="bg-white p-6 rounded shadow-md">
                 <div class="mb-4">
-                    <label class="block text-gray-700">Search Query</label>
-                    <input type="text" name="query" class="w-full p-2 border rounded" placeholder="e.g., spicy biryani">
+                    <label class="block text-sm font-medium text-gray-700">Search Query</label>
+                    <input type="text" name="query" placeholder="e.g., biryani, spicy karahi" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Cuisine Preferences</label>
-                    <div class="flex space-x-4">
-                        <div>
-                            <label class="block text-gray-600">Pakistani</label>
-                            <input type="number" name="pakistani_cuisine" class="w-full p-2 border rounded" min="0" max="1" step="0.1" value="0.5">
-                        </div>
-                        <div>
-                            <label class="block text-gray-600">Italian</label>
-                            <input type="number" name="italian_cuisine" class="w-full p-2 border rounded" min="0" max="1" step="0.1" value="0.3">
-                        </div>
-                        <div>
-                            <label class="block text-gray-600">Chinese</label>
-                            <input type="number" name="chinese_cuisine" class="w-full p-2 border rounded" min="0" max="1" step="0.1" value="0.2">
-                        </div>
+                    <label class="block text-sm font-medium text-gray-700">Cuisine Preferences</label>
+                    <div class="mt-2">
+                        <label class="inline-flex items-center">
+                            <span class="mr-2">Pakistani</span>
+                            <input type="number" name="pakistani_cuisine" value="0.5" min="0" max="1" step="0.1" class="w-20 p-1 border border-gray-300 rounded">
+                        </label>
+                        <label class="inline-flex items-center ml-4">
+                            <span class="mr-2">Italian</span>
+                            <input type="number" name="italian_cuisine" value="0.3" min="0" max="1" step="0.1" class="w-20 p-1 border border-gray-300 rounded">
+                        </label>
+                        <label class="inline-flex items-center ml-4">
+                            <span class="mr-2">Chinese</span>
+                            <input type="number" name="chinese_cuisine" value="0.2" min="0" max="1" step="0.1" class="w-20 p-1 border border-gray-300 rounded">
+                        </label>
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Quality Expectation (1-10)</label>
-                    <input type="number" name="quality_expectation" class="w-full p-2 border rounded" min="1" max="10" value="7">
+                    <label class="block text-sm font-medium text-gray-700">Quality Expectation (1-10)</label>
+                    <input type="number" name="quality_expectation" value="7" min="1" max="10" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
                 </div>
-                <button type="button" onclick="performSearch()" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Search</button>
+                <button type="submit" class="w-full bg-orange-500 text-white p-2 rounded hover:bg-orange-600">Search</button>
             </form>
-            <div id="loadingSearch" class="hidden text-center mt-4">
-                <p class="text-gray-700">Searching for reviews...</p>
-                <div class="loader"></div>
+            <div id="search-loading" class="hidden mt-4 text-center">
+                <p class="text-gray-600">Searching for reviews...</p>
             </div>
-            <div id="searchResult" class="mt-4"></div>
+            <div id="search-result" class="hidden mt-4 p-4 bg-white rounded shadow-md"></div>
         </div>
     </div>
 
     <script>
+        const MAX_FILE_SIZE_MB = 20;
+        const SUPPORTED_TYPES = ['image/jpeg', 'image/png', 'video/mp4', 'video/avi', 'video/quicktime'];
+
         function showTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             document.getElementById(tabId).classList.remove('hidden');
-            document.querySelectorAll('.flex button').forEach(btn => btn.classList.replace('bg-blue-500', 'bg-gray-300'));
-            document.querySelectorAll('.flex button').forEach(btn => btn.classList.replace('text-white', 'text-gray-800'));
-            document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.replace('bg-gray-300', 'bg-blue-500');
-            document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.replace('text-gray-800', 'text-white');
+            document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
         }
 
-        function submitReview() {
-            const form = document.getElementById('reviewForm');
-            const formData = new FormData(form);
-            document.getElementById('loadingReview').classList.remove('hidden');
-            fetch('/process_review', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('loadingReview').classList.add('hidden');
-                const resultDiv = document.getElementById('reviewResult');
-                if (data.success) {
-                    resultDiv.innerHTML = `<div class="bg-green-100 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold">Review Submitted Successfully!</h3>
-                        <p><strong>Quality Score:</strong> ${data.results.quality_score.toFixed(2)}</p>
-                        <p><strong>Reach Level:</strong> ${data.results.reach_calculation.reach_level}</p>
-                        <p><strong>AI Analysis:</strong></p>
-                        <ul>
-                            ${Object.entries(data.results.ai_analysis).map(([key, value]) => `<li><strong>${key}:</strong> ${JSON.stringify(value)}</li>`).join('')}
-                        </ul>
-                    </div>`;
-                } else {
-                    resultDiv.innerHTML = `<div class="bg-red-100 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold">Error</h3>
-                        <p>${data.error}</p>
-                    </div>`;
-                }
-            })
-            .catch(error => {
-                document.getElementById('loadingReview').classList.add('hidden');
-                document.getElementById('reviewResult').innerHTML = `<div class="bg-red-100 p-4 rounded-lg">
-                    <h3 class="text-lg font-semibold">Error</h3>
-                    <p>${error.message}</p>
-                </div>`;
-            });
+        function formatReviewResult(result) {
+            let html = `<p class="text-green-600">${result.message}</p>`;
+            const data = result.results;
+            html += `<h3 class="text-lg font-semibold">Review Details</h3>`;
+            html += `<p><strong>Restaurant:</strong> ${data.mongodb_data.restaurantName} (${data.mongodb_data.branchName})</p>`;
+            html += `<p><strong>Service Type:</strong> ${data.mongodb_data.serviceType}</p>`;
+            html += `<p><strong>Total Bill:</strong> PKR ${data.mongodb_data.totalBill}</p>`;
+            html += `<p><strong>User Thoughts:</strong> ${data.mongodb_data.userThoughts}</p>`;
+            html += `<p><strong>Hashtags:</strong> ${data.mongodb_data.hashtags.join(', ')}</p>`;
+            html += `<p><strong>Average Rating:</strong> ${data.mongodb_data.averageRating.toFixed(2)}</p>`;
+            html += `<h4 class="text-md font-semibold mt-2">AI Analysis:</h4>`;
+            if (data.ai_analysis && data.ai_analysis.length > 0) {
+                data.ai_analysis.forEach((analysis, idx) => {
+                    html += `<div class="ml-4">`;
+                    html += `<p><strong>Media ${idx + 1}:</strong></p>`;
+                    html += `<p><strong>Quality Score:</strong> ${analysis.visual.quality.toFixed(2)}</p>`;
+                    html += `<p><strong>Keywords:</strong> ${analysis.keywords.join(', ')}</p>`;
+                    html += `<p><strong>Items Detected:</strong> ${analysis.items.map(item => `${item.name} (${(item.confidence * 100).toFixed(0)}%)`).join(', ')}</p>`;
+                    html += `</div>`;
+                });
+            } else {
+                html += `<p class="text-yellow-600">No valid AI analysis available for the uploaded media.</p>`;
+            }
+            if (data.mongodb_data.images && data.mongodb_data.images.length > 0) {
+                html += `<h4 class="text-md font-semibold mt-2">Media Thumbnails:</h4>`;
+                data.mongodb_data.images.forEach((base64, idx) => {
+                    html += `<img src="data:image/jpeg;base64,${base64}" class="thumbnail" alt="Media ${idx + 1}">`;
+                });
+            }
+            html += `<h4 class="text-md font-semibold mt-2">Reach Calculation:</h4>`;
+            html += `<p><strong>Quality Score:</strong> ${data.reach_calculation.quality_score.toFixed(2)}</p>`;
+            html += `<p><strong>Reach Level:</strong> ${data.reach_calculation.reach_level}</p>`;
+            return html;
         }
 
-        // Update search results to display images from the payload
-        function performSearch() {
-            const form = document.getElementById('searchForm');
-            const formData = new FormData(form);
-            document.getElementById('loadingSearch').classList.remove('hidden');
-            fetch('/search', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('loadingSearch').classList.add('hidden');
-                const resultDiv = document.getElementById('searchResult');
-                if (data.success) {
-                    let html = '<div class="bg-green-100 p-4 rounded-lg">';
-                    html += '<h3 class="text-lg font-semibold">Search Results</h3>';
-                    data.results.forEach(result => {
-                        const payload = result.payload;
-                        const images = payload.images || [];
-                        html += `<div class="border-b py-2">
-                            ${images.map(image => `<img src="data:image/jpeg;base64,${image}" alt="Review Image" class="w-64 h-auto mb-2 rounded-lg">`).join('')}
-                            <p><strong>Restaurant:</strong> ${payload.restaurantName} (${payload.branchName})</p>
-                            <p><strong>Rating:</strong> ${payload.averageRating.toFixed(1)}</p>
-                            <p><strong>Relevance:</strong> ${result.relevance.toFixed(2)}</p>
-                            <p><strong>AI Analysis:</strong></p>
-                            <ul>
-                                ${Object.entries(payload.ai_analysis).map(([key, value]) => `<li><strong>${key}:</strong> ${JSON.stringify(value)}</li>`).join('')}
-                            </ul>
-                        </div>`;
-                    });
-                    html += '</div>';
-                    resultDiv.innerHTML = html;
-                } else {
-                    resultDiv.innerHTML = `<div class="bg-red-100 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold">Error</h3>
-                        <p>${data.error}</p>
-                    </div>`;
-                }
-            })
-            .catch(error => {
-                document.getElementById('loadingSearch').classList.add('hidden');
-                document.getElementById('searchResult').innerHTML = `<div class="bg-red-100 p-4 rounded-lg">
-                    <h3 class="text-lg font-semibold">Error</h3>
-                    <p>${error.message}</p>
-                </div>`;
-            });
+        function formatSearchResult(result) {
+            let html = `<p class="text-green-600">${result.message}</p>`;
+            if (result.results.length === 0) {
+                html += `<p>No reviews found.</p>`;
+            } else {
+                result.results.forEach((res, idx) => {
+                    const data = res.payload;
+                    html += `<div class="mb-4 p-4 bg-gray-50 rounded shadow-sm">`;
+                    html += `<p><strong>Review ${idx + 1}:</strong> ${data.restaurantName} (${data.branchName})</p>`;
+                    html += `<p><strong>Rating:</strong> ${data.averageRating.toFixed(2)}</p>`;
+                    if (data.ai_analysis && data.ai_analysis.length > 0) {
+                        html += `<p><strong>AI Analysis:</strong></p>`;
+                        data.ai_analysis.forEach((analysis, aIdx) => {
+                            html += `<div class="ml-4">`;
+                            html += `<p><strong>Media ${aIdx + 1}:</strong> Quality: ${analysis.visual.quality.toFixed(2)}, Items: ${analysis.items.map(item => item.name).join(', ')}</p>`;
+                            html += `</div>`;
+                        });
+                    }
+                    if (data.images && data.images.length > 0) {
+                        html += `<p><strong>Media:</strong></p>`;
+                        data.images.forEach((base64, imgIdx) => {
+                            html += `<img src="data:image/jpeg;base64,${base64}" class="thumbnail" alt="Media ${imgIdx + 1}">`;
+                        });
+                    }
+                    html += `</div>`;
+                });
+            }
+            return html;
         }
+
+        document.getElementById('review-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const files = formData.getAll('media');
+            for (const file of files) {
+                if (!SUPPORTED_TYPES.includes(file.type)) {
+                    alert(`Unsupported file type: ${file.name}. Please upload images (JPEG, PNG) or videos (MP4, AVI, MOV).`);
+                    return;
+                }
+                if (file.size / (1024 * 1024) > MAX_FILE_SIZE_MB) {
+                    alert(`File ${file.name} exceeds ${MAX_FILE_SIZE_MB}MB limit.`);
+                    return;
+                }
+            }
+            document.getElementById('review-loading').classList.remove('hidden');
+            document.getElementById('review-result').classList.add('hidden');
+
+            try {
+                const response = await fetch('/process_review', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                document.getElementById('review-loading').classList.add('hidden');
+                const resultDiv = document.getElementById('review-result');
+                resultDiv.classList.remove('hidden');
+                if (result.success) {
+                    resultDiv.innerHTML = formatReviewResult(result);
+                } else {
+                    resultDiv.innerHTML = `<p class="text-red-600">Error: ${result.error}</p>`;
+                }
+            } catch (error) {
+                document.getElementById('review-loading').classList.add('hidden');
+                document.getElementById('review-result').classList.remove('hidden');
+                document.getElementById('review-result').innerHTML = `<p class="text-red-600">Error: ${error.message}</p>`;
+            }
+        });
+
+        document.getElementById('search-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            document.getElementById('search-loading').classList.remove('hidden');
+            document.getElementById('search-result').classList.add('hidden');
+
+            const formData = new FormData(e.target);
+            try {
+                const response = await fetch('/search', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                document.getElementById('search-loading').classList.add('hidden');
+                const resultDiv = document.getElementById('search-result');
+                resultDiv.classList.remove('hidden');
+                if (result.success) {
+                    resultDiv.innerHTML = formatSearchResult(result);
+                } else {
+                    resultDiv.innerHTML = `<p class="text-red-600">Error: ${result.error}</p>`;
+                }
+            } catch (error) {
+                document.getElementById('search-loading').classList.add('hidden');
+                document.getElementById('search-result').classList.remove('hidden');
+                document.getElementById('search-result').innerHTML = `<p class="text-red-600">Error: ${error.message}</p>`;
+            }
+        });
     </script>
 </body>
 </html>
