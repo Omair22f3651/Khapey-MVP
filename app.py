@@ -193,17 +193,26 @@ class KhapeyMVP:
 
             # Append user input to prompt
             user_context = ""
+            user_thoughts = ""
+            hashtags = []
+            restaurant_name = ""
+            branch_name = ""
             if review_data:
+                print(review_data)
                 user_thoughts = review_data.get("userThoughts", "")
                 hashtags = review_data.get("hashtags", [])
-                if user_thoughts:
-                    user_context += f"User description: {user_thoughts}\n"
-                if hashtags:
-                    user_context += f"Hashtags: {' '.join(f'#{tag}' for tag in hashtags)}\n"
+                restaurant_name = review_data.get("restaurantName", "")
+                branch_name = review_data.get("branchName", "")
+            if user_thoughts:
+                user_context += f"User description: {user_thoughts}\n"
+            if hashtags:
+                user_context += f"Hashtags: {' '.join(f'#{tag}' for tag in hashtags)}\n"
+            if restaurant_name or branch_name:
+                user_context += f"Restaurant: {restaurant_name} ({branch_name})\n"
             prompt = (
                 PRODUCTION_PROMPT +
-                f"\nGenerate analysis for image_id: {image_id}. Ensure Pakistani cuisine terms are used (e.g., 'nihari', 'biryani'). "
-                f"Use the following user-provided context to enhance analysis:\n{user_context}Return response in JSON format."
+                f"\nAnalyze media for image_id: {image_id}. Use Pakistani cuisine terms (e.g., 'nihari', 'biryani', 'karahi'). "
+                f"User-provided context:\n{user_context}\n User Provided review data:\n{review_data}\nReturn response in JSON format."
             )
             logging.debug(f"Prompt for image_id {image_id}:\n{prompt}")
             print(f"INFO: Prepared prompt for image_id {image_id} with user context.")

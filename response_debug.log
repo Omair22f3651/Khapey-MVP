@@ -1,33 +1,209 @@
-2025-08-12 05:51:59,930 - DEBUG - Review data prepared: {
-  "restaurantName": "HomeRina Nihari",
-  "branchName": "DHA Branch",
-  "serviceType": "dineIn",
-  "totalBill": 1500.0,
-  "rateUserExperience": {
-    "foodTaste": 4,
-    "ambience": 4,
-    "staff": 3,
-    "willRecommend": 4
-  },
-  "averageRating": 3.75,
-  "userThoughts": "Nihari best in town",
-  "hashtags": [
-    "nihari",
-    "nihari"
-  ]
-}
-2025-08-12 05:51:59,931 - DEBUG - Starting analyze_review for 1 media files.
-2025-08-12 05:51:59,931 - DEBUG - Processing media 1/1...
-2025-08-12 05:51:59,931 - DEBUG - Media 1 detected as video, filename: chicken nihari review \U0001f60d day-117 badiya tha taste \U0001f600 #shorts #streetfood.mp4, content_type: video/mp4
-2025-08-12 05:51:59,931 - DEBUG - Assigned image_id: e86f7942-8884-4b37-a15d-ae2fb86d99a4
-2025-08-12 05:51:59,931 - DEBUG - Opening media for image_id: e86f7942-8884-4b37-a15d-ae2fb86d99a4
-2025-08-12 05:51:59,932 - DEBUG - Video data prepared for image_id: e86f7942-8884-4b37-a15d-ae2fb86d99a4, size: 1.08MB
-2025-08-12 05:51:59,932 - DEBUG - Prompt for image_id e86f7942-8884-4b37-a15d-ae2fb86d99a4:
-Khapey-Mod v1.3 — Vision-LLM for a Pakistani food platform.
+2025-08-22 03:16:24,502 - DEBUG - Received response for image_id: 2952731f-47e4-406a-9a9c-000c26bd9102
+2025-08-22 03:16:24,503 - DEBUG - Raw Gemini response for image_id 2952731f-47e4-406a-9a9c-000c26bd9102:
+```json
+[
+  {
+    "image_id": "2952731f-47e4-406a-9a9c-000c26bd9102",
+    "scene": "ambiance",
+    "visual": {
+      "description": "The exterior of a modern burger joint called 'BRIM BIG JUICY BURGERS'. The facade features a prominent black stone finish with illuminated signage. A large glass window reveals the indoor seating area. An awning shades the entrance, and outdoor seating with wicker chairs and a glass-topped table is visible in the foreground. The overall impression is of a contemporary and inviting dining establishment.",
+      "confidence": 0.9,
+      "quality": 8.5,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "mixed",
+      "lighting": "daylight",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "burger",
+        "confidence": 0.8
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "brim",
+      "juicy",
+      "beef",
+      "restaurant",
+      "exterior",
+      "modern",
+      "dining"
+    ],
+    "ambience_features": [
+      "illuminated signage",
+      "glass facade",
+      "outdoor seating",
+      "modern decor"
+    ],
+    "thumbnail_rank": 0.6,
+    "is_video": false
+  }
+]
+```
+Raw response for image_id 2952731f-47e4-406a-9a9c-000c26bd9102:
+```json
+[
+  {
+    "image_id": "2952731f-47e4-406a-9a9c-000c26bd9102",
+    "scene": "ambiance",
+    "visual": {
+      "description": "The exterior of a modern burger joint called 'BRIM BIG JUICY BURGERS'. The facade features a prominent black stone finish with illuminated signage. A large glass window reveals the indoor seating area. An awning shades the entrance, and outdoor seating with wicker chairs and a glass-topped table is visible in the foreground. The overall impression is of a contemporary and inviting dining establishment.",
+      "confidence": 0.9,
+      "quality": 8.5,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "mixed",
+      "lighting": "daylight",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "burger",
+        "confidence": 0.8
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "brim",
+      "juicy",
+      "beef",
+      "restaurant",
+      "exterior",
+      "modern",
+      "dining"
+    ],
+    "ambience_features": [
+      "illuminated signage",
+      "glass facade",
+      "outdoor seating",
+      "modern decor"
+    ],
+    "thumbnail_rank": 0.6,
+    "is_video": false
+  }
+]
+```
+==================================================
+2025-08-22 03:16:24,504 - DEBUG - Cleaned response for image_id 2952731f-47e4-406a-9a9c-000c26bd9102:
+[
+  {
+    "image_id": "2952731f-47e4-406a-9a9c-000c26bd9102",
+    "scene": "ambiance",
+    "visual": {
+      "description": "The exterior of a modern burger joint called 'BRIM BIG JUICY BURGERS'. The facade features a prominent black stone finish with illuminated signage. A large glass window reveals the indoor seating area. An awning shades the entrance, and outdoor seating with wicker chairs and a glass-topped table is visible in the foreground. The overall impression is of a contemporary and inviting dining establishment.",
+      "confidence": 0.9,
+      "quality": 8.5,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "mixed",
+      "lighting": "daylight",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "burger",
+        "confidence": 0.8
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "brim",
+      "juicy",
+      "beef",
+      "restaurant",
+      "exterior",
+      "modern",
+      "dining"
+    ],
+    "ambience_features": [
+      "illuminated signage",
+      "glass facade",
+      "outdoor seating",
+      "modern decor"
+    ],
+    "thumbnail_rank": 0.6,
+    "is_video": false
+  }
+]
+Cleaned response for image_id 2952731f-47e4-406a-9a9c-000c26bd9102:
+[
+  {
+    "image_id": "2952731f-47e4-406a-9a9c-000c26bd9102",
+    "scene": "ambiance",
+    "visual": {
+      "description": "The exterior of a modern burger joint called 'BRIM BIG JUICY BURGERS'. The facade features a prominent black stone finish with illuminated signage. A large glass window reveals the indoor seating area. An awning shades the entrance, and outdoor seating with wicker chairs and a glass-topped table is visible in the foreground. The overall impression is of a contemporary and inviting dining establishment.",
+      "confidence": 0.9,
+      "quality": 8.5,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "mixed",
+      "lighting": "daylight",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "burger",
+        "confidence": 0.8
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "brim",
+      "juicy",
+      "beef",
+      "restaurant",
+      "exterior",
+      "modern",
+      "dining"
+    ],
+    "ambience_features": [
+      "illuminated signage",
+      "glass facade",
+      "outdoor seating",
+      "modern decor"
+    ],
+    "thumbnail_rank": 0.6,
+    "is_video": false
+  }
+]
+==================================================
+2025-08-22 03:16:24,505 - DEBUG - Generating image embedding with nomic-embed-vision-v1...
+2025-08-22 03:16:24,509 - DEBUG - Starting new HTTPS connection (1): api-atlas.nomic.ai:443
+2025-08-22 03:16:25,585 - DEBUG - https://api-atlas.nomic.ai:443 "GET /v1/user HTTP/1.1" 307 0
+2025-08-22 03:16:25,898 - DEBUG - https://api-atlas.nomic.ai:443 "GET /v1/user/ HTTP/1.1" 200 None
+2025-08-22 03:16:25,945 - DEBUG - Starting new HTTPS connection (1): api-atlas.nomic.ai:443
+2025-08-22 03:16:27,425 - DEBUG - https://api-atlas.nomic.ai:443 "POST /v1/embedding/image HTTP/1.1" 200 None
+2025-08-22 03:16:27,426 - DEBUG - Generated image embedding, length: 768
+2025-08-22 03:16:27,428 - DEBUG - Embedding assigned for image_id 2952731f-47e4-406a-9a9c-000c26bd9102, length: 768, is_video: False
+2025-08-22 03:16:27,430 - DEBUG - Generating image embedding with nomic-embed-vision-v1...
+2025-08-22 03:16:27,477 - DEBUG - Starting new HTTPS connection (1): api-atlas.nomic.ai:443
+2025-08-22 03:16:28,217 - DEBUG - https://api-atlas.nomic.ai:443 "POST /v1/embedding/image HTTP/1.1" 200 None
+2025-08-22 03:16:28,219 - DEBUG - Generated image embedding, length: 768
+2025-08-22 03:16:28,221 - DEBUG - Media 1 processed successfully, quality: 8.5
+2025-08-22 03:16:28,222 - DEBUG - Processing media 2/3...
+2025-08-22 03:16:28,222 - DEBUG - Media 2 detected as image, filename: brim3.png, content_type: image/png
+2025-08-22 03:16:28,222 - DEBUG - Assigned image_id: 177e8565-3524-4595-bbec-66c2204628be
+2025-08-22 03:16:28,222 - DEBUG - Opening media for image_id: 177e8565-3524-4595-bbec-66c2204628be
+2025-08-22 03:16:28,253 - DEBUG - Image converted to JPEG for image_id: 177e8565-3524-4595-bbec-66c2204628be
+2025-08-22 03:16:28,254 - DEBUG - Prompt for image_id 177e8565-3524-4595-bbec-66c2204628be:
+Khapey-Mod v2.0 — Vision-LLM for a Pakistani Food Platform
 
-You will be provided either an image or a video related to food or restaurant contexts.
+You are an expert in analyzing food-related media (images or videos) for a Pakistani restaurant review platform. Your task is to analyze the provided media and return a JSON array with one object per media file, adhering to the following schema:
 
-Return a JSON array with one object per media file (image or video), using this schema:
 {
   "image_id": string,
   "scene": "dish_closeup" | "beverage" | "menu" | "ambiance",
@@ -47,131 +223,554 @@ Return a JSON array with one object per media file (image or video), using this 
   "penalty_score": int,
   "keywords": [string],
   "ambience_features": [string],
-  "thumbnail_rank": float
+  "thumbnail_rank": float,
+  "is_video": boolean
 }
 
-If the media shows no food/restaurant context, return [{"not_food_related": true}].
+**Instructions**:
+1. **Media Analysis**:
+   - For images, analyze the entire scene.
+   - For videos, evaluate multiple keyframes (e.g., start, middle, end) to capture the overall context, prioritizing frames with food or restaurant elements.
+   - Identify food items, focusing on Pakistani cuisine (e.g., 'nihari', 'biryani', 'karahi', 'haleem', 'paratha', 'samosa', 'chai'). Include generic terms (e.g., 'curry', 'rice') only if specific Pakistani terms don’t apply.
+   - Provide a detailed `visual.description` (50-100 words) describing the dish, presentation, and setting (e.g., 'A steaming plate of chicken karahi garnished with fresh coriander, served in a traditional wok with naan on the side, in a cozy indoor setting').
+2. **Scoring**:
+   - `visual.quality` (0-10): Based on clarity, sharpness, and composition (e.g., 8 for clear, well-composed images; 3 for blurry or cluttered images).
+   - `visual.appeal_score` (0-1): Reflects visual attractiveness for food (e.g., vibrant colors, appetizing presentation).
+   - `visual.confidence` (0-1): Confidence in identifying food/restaurant context.
+   - `thumbnail_rank` (0-1): Suitability as a thumbnail (higher for vibrant, clear, food-focused media).
+   - `penalty_score` (0-100): Apply penalties for issues like half-eaten food (20), poor lighting (30), or inappropriate content (50).
+3. **Context and Keywords**:
+   - Infer `context.ambiance`, `context.lighting`, and `context.meal_timing` from visual cues (e.g., bright sunlight for 'daylight', dim warm lights for 'dinner').
+   - List `keywords` for food items, preparation styles, and ambiance (e.g., ['spicy', 'karahi', 'naan', 'cozy']).
+   - List `ambience_features` for setting details (e.g., ['wooden table', 'modern decor', 'open kitchen']).
+4. **Edge Cases**:
+   - If the media is not food-related (e.g., landscapes, people without food), return [{"not_food_related": true}].
+   - For low-quality or ambiguous media, provide best-effort analysis with lower `confidence` and `quality` scores.
+5. **Output**:
+   - Return only valid JSON with no extra text, code fences, or explanations.
+   - Exclude 'embedding' field from the output.
+   - Include `is_video` field to indicate if the media is a video.
 
-Special Instructions:
-- Apply the same analysis criteria for both still images and videos.
-- For videos, consider the overall scene across multiple frames, not just one frame.
-- Use Pakistani cuisine terms (e.g., 'nihari', 'biryani').
-- Exclude 'embedding' field from JSON output.
-- Output only valid JSON with no extra text or explanation.
-Generate analysis for image_id: e86f7942-8884-4b37-a15d-ae2fb86d99a4. Ensure Pakistani cuisine terms are used (e.g., 'nihari', 'biryani'). Use the following user-provided context to enhance analysis:
-User description: Nihari best in town
-Hashtags: #nihari #nihari
+**User Context**:
+If provided, incorporate user input (e.g., description, hashtags) to refine analysis, prioritizing mentioned food items or context.
+Analyze media for image_id: 177e8565-3524-4595-bbec-66c2204628be. Use Pakistani cuisine terms (e.g., 'nihari', 'biryani', 'karahi'). User-provided context:
+User description: Best juicy beef burgers in town !
+Hashtags: #brim #juicy #beef #burgers
+Restaurant: Brim (Johar town)
+
+ User Provided review data:
+{'restaurantName': 'Brim', 'branchName': 'Johar town', 'serviceType': 'dineIn', 'totalBill': 3420.0, 'rateUserExperience': {'foodTaste': 4, 'ambience': 5, 'staff': 2, 'willRecommend': 5}, 'averageRating': 4.0, 'userThoughts': 'Best juicy beef burgers in town !', 'hashtags': ['brim', 'juicy', 'beef', 'burgers']}
 Return response in JSON format.
-2025-08-12 05:51:59,933 - DEBUG - Sending media to Gemini model for image_id: e86f7942-8884-4b37-a15d-ae2fb86d99a4, mime_type: video/mp4
-2025-08-12 05:52:02,911 - DEBUG - Received response for image_id: e86f7942-8884-4b37-a15d-ae2fb86d99a4
-2025-08-12 05:52:02,912 - DEBUG - Raw Gemini response for image_id e86f7942-8884-4b37-a15d-ae2fb86d99a4:
-The video shows a close-up of a person eating a meal. They are seen tearing off pieces of naan bread and dipping them into a creamy, greenish curry. The curry appears to have chunks of meat in it, possibly chicken, and is garnished with chopped green herbs. Another bowl of curry, a darker reddish-brown, is also visible in the foreground. The meal is served on a wooden table, and the text "THISISSAHARANPUR" is overlaid on the video.
-Raw response for image_id e86f7942-8884-4b37-a15d-ae2fb86d99a4:
-The video shows a close-up of a person eating a meal. They are seen tearing off pieces of naan bread and dipping them into a creamy, greenish curry. The curry appears to have chunks of meat in it, possibly chicken, and is garnished with chopped green herbs. Another bowl of curry, a darker reddish-brown, is also visible in the foreground. The meal is served on a wooden table, and the text "THISISSAHARANPUR" is overlaid on the video.
-==================================================
-2025-08-12 05:52:02,913 - DEBUG - Cleaned response for image_id e86f7942-8884-4b37-a15d-ae2fb86d99a4:
-The video shows a close-up of a person eating a meal. They are seen tearing off pieces of naan bread and dipping them into a creamy, greenish curry. The curry appears to have chunks of meat in it, possibly chicken, and is garnished with chopped green herbs. Another bowl of curry, a darker reddish-brown, is also visible in the foreground. The meal is served on a wooden table, and the text "THISISSAHARANPUR" is overlaid on the video.
-Cleaned response for image_id e86f7942-8884-4b37-a15d-ae2fb86d99a4:
-The video shows a close-up of a person eating a meal. They are seen tearing off pieces of naan bread and dipping them into a creamy, greenish curry. The curry appears to have chunks of meat in it, possibly chicken, and is garnished with chopped green herbs. Another bowl of curry, a darker reddish-brown, is also visible in the foreground. The meal is served on a wooden table, and the text "THISISSAHARANPUR" is overlaid on the video.
-==================================================
-2025-08-12 05:52:02,913 - WARNING - JSON parsing error for image_id e86f7942-8884-4b37-a15d-ae2fb86d99a4: Expecting value: line 1 column 1 (char 0). Falling back to text-based analysis.
-JSON error for image_id e86f7942-8884-4b37-a15d-ae2fb86d99a4: Expecting value: line 1 column 1 (char 0)
-Response: The video shows a close-up of a person eating a meal. They are seen tearing off pieces of naan bread and dipping them into a creamy, greenish curry. The curry appears to have chunks of meat in it, possibly chicken, and is garnished with chopped green herbs. Another bowl of curry, a darker reddish-brown, is also visible in the foreground. The meal is served on a wooden table, and the text "THISISSAHARANPUR" is overlaid on the video.
-==================================================
-2025-08-12 05:52:02,941 - DEBUG - Fallback JSON created for image_id e86f7942-8884-4b37-a15d-ae2fb86d99a4: [
+2025-08-22 03:16:28,254 - DEBUG - Sending media to Gemini model for image_id: 177e8565-3524-4595-bbec-66c2204628be, mime_type: image/jpeg
+2025-08-22 03:16:31,226 - DEBUG - Received response for image_id: 177e8565-3524-4595-bbec-66c2204628be
+2025-08-22 03:16:31,227 - DEBUG - Raw Gemini response for image_id 177e8565-3524-4595-bbec-66c2204628be:
+```json
+[
   {
-    "image_id": "e86f7942-8884-4b37-a15d-ae2fb86d99a4",
-    "visual": {
-      "quality": 5.0,
-      "description": "Food scene",
-      "confidence": 0.8,
-      "appeal_score": 0.7
-    },
+    "image_id": "177e8565-3524-4595-bbec-66c2204628be",
     "scene": "dish_closeup",
-    "context": {
-      "ambiance": "unknown",
-      "lighting": "unknown",
-      "meal_timing": "unknown"
+    "visual": {
+      "description": "A close-up shot of a double beef burger, generously topped with melted orange cheese and what appears to be diced pickles. The sesame seed bun is golden brown and slightly toasted. The burger is partially wrapped in foil, revealing its juicy patties and rich toppings. The background is blurred, showing an indoor restaurant setting with some kitchen equipment visible.",
+      "confidence": 0.9,
+      "quality": 8.0,
+      "appeal_score": 0.85
     },
-    "keywords": [
-      "video",
-      "close",
-      "person",
-      "meal",
-      "pieces",
-      "naan",
-      "bread"
-    ],
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
     "items": [
       {
-        "name": "curry",
+        "name": "beef burger",
+        "confidence": 0.95
+      },
+      {
+        "name": "cheese",
         "confidence": 0.8
       },
       {
-        "name": "nihari",
-        "confidence": 0.8
+        "name": "pickles",
+        "confidence": 0.6
       }
     ],
     "flag_type": "none",
     "penalty_score": 0,
-    "thumbnail_rank": 0.5,
-    "is_video": true
+    "keywords": [
+      "burger",
+      "beef",
+      "juicy",
+      "cheese",
+      "fast food",
+      "sandwich",
+      "lunch",
+      "dinner"
+    ],
+    "ambience_features": [
+      "indoor dining",
+      "restaurant kitchen"
+    ],
+    "thumbnail_rank": 0.9,
+    "is_video": false
   }
 ]
-2025-08-12 05:52:02,946 - DEBUG - Created temporary video file: C:\Users\mamuj\AppData\Local\Temp\tmpxqrfyltk.mp4
-2025-08-12 05:52:02,971 - DEBUG - Video metadata - frames: 134, fps: 30.00, duration: 4.47s
-2025-08-12 05:52:02,990 - DEBUG - Extracted frame 1/2 at position 0
-2025-08-12 05:52:02,994 - DEBUG - Starting new HTTPS connection (1): api-atlas.nomic.ai:443
-2025-08-12 05:52:04,008 - DEBUG - https://api-atlas.nomic.ai:443 "GET /v1/user HTTP/1.1" 307 0
-2025-08-12 05:52:04,326 - DEBUG - https://api-atlas.nomic.ai:443 "GET /v1/user/ HTTP/1.1" 200 None
-2025-08-12 05:52:04,345 - DEBUG - Starting new HTTPS connection (1): api-atlas.nomic.ai:443
-2025-08-12 05:52:05,613 - DEBUG - https://api-atlas.nomic.ai:443 "POST /v1/embedding/image HTTP/1.1" 200 None
-2025-08-12 05:52:05,614 - DEBUG - Generated embedding for frame 1, length: 768
-2025-08-12 05:52:05,624 - DEBUG - Extracted frame 2/2 at position 67
-2025-08-12 05:52:05,628 - DEBUG - Starting new HTTPS connection (1): api-atlas.nomic.ai:443
-2025-08-12 05:52:06,166 - DEBUG - https://api-atlas.nomic.ai:443 "POST /v1/embedding/image HTTP/1.1" 200 None
-2025-08-12 05:52:06,168 - DEBUG - Generated embedding for frame 2, length: 768
-2025-08-12 05:52:06,178 - DEBUG - Deleted temporary video file: C:\Users\mamuj\AppData\Local\Temp\tmpxqrfyltk.mp4
-2025-08-12 05:52:06,178 - INFO - Generated mean video embedding from 2 frames, length: 768
-2025-08-12 05:52:06,179 - DEBUG - Embedding assigned for image_id e86f7942-8884-4b37-a15d-ae2fb86d99a4, length: 768, is_video: True
-2025-08-12 05:52:06,181 - DEBUG - Created temporary video file: C:\Users\mamuj\AppData\Local\Temp\tmprzlmt_u_.mp4
-2025-08-12 05:52:06,196 - DEBUG - Video metadata - frames: 134, fps: 30.00, duration: 4.47s
-2025-08-12 05:52:06,210 - DEBUG - Extracted frame 1/2 at position 0
-2025-08-12 05:52:06,214 - DEBUG - Starting new HTTPS connection (1): api-atlas.nomic.ai:443
-2025-08-12 05:52:06,801 - DEBUG - https://api-atlas.nomic.ai:443 "POST /v1/embedding/image HTTP/1.1" 200 None
-2025-08-12 05:52:06,803 - DEBUG - Generated embedding for frame 1, length: 768
-2025-08-12 05:52:06,814 - DEBUG - Extracted frame 2/2 at position 67
-2025-08-12 05:52:06,817 - DEBUG - Starting new HTTPS connection (1): api-atlas.nomic.ai:443
-2025-08-12 05:52:07,437 - DEBUG - https://api-atlas.nomic.ai:443 "POST /v1/embedding/image HTTP/1.1" 200 None
-2025-08-12 05:52:07,439 - DEBUG - Generated embedding for frame 2, length: 768
-2025-08-12 05:52:07,447 - DEBUG - Deleted temporary video file: C:\Users\mamuj\AppData\Local\Temp\tmprzlmt_u_.mp4
-2025-08-12 05:52:07,447 - INFO - Generated mean video embedding from 2 frames, length: 768
-2025-08-12 05:52:07,449 - DEBUG - Created temporary video file for keyframe: C:\Users\mamuj\AppData\Local\Temp\tmp3fjdgfwv.mp4
-2025-08-12 05:52:07,467 - DEBUG - Video has 134 frames
-2025-08-12 05:52:07,490 - DEBUG - Deleted temporary video file: C:\Users\mamuj\AppData\Local\Temp\tmp3fjdgfwv.mp4
-2025-08-12 05:52:07,492 - DEBUG - Generated JPEG keyframe for video.
-2025-08-12 05:52:07,492 - DEBUG - Media 1 processed successfully, quality: 5.0
-2025-08-12 05:52:07,492 - INFO - Aggregated quality_score: 5.00
-2025-08-12 05:52:07,494 - DEBUG - close.started
-2025-08-12 05:52:07,494 - DEBUG - close.complete
-2025-08-12 05:52:07,494 - DEBUG - connect_tcp.started host='35f22026-33fa-458c-b77f-9ac268313032.eu-central-1-0.aws.cloud.qdrant.io' port=6333 local_address=None timeout=5.0 socket_options=None
-2025-08-12 05:52:07,677 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001FBC00A70D0>
-2025-08-12 05:52:07,677 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x000001FBBFCEF920> server_hostname='35f22026-33fa-458c-b77f-9ac268313032.eu-central-1-0.aws.cloud.qdrant.io' timeout=5.0
-2025-08-12 05:52:07,891 - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001FBC1D14650>
-2025-08-12 05:52:07,892 - DEBUG - send_request_headers.started request=<Request [b'PUT']>
-2025-08-12 05:52:07,892 - DEBUG - send_request_headers.complete
-2025-08-12 05:52:07,892 - DEBUG - send_request_body.started request=<Request [b'PUT']>
-2025-08-12 05:52:07,892 - DEBUG - send_request_body.complete
-2025-08-12 05:52:07,892 - DEBUG - receive_response_headers.started request=<Request [b'PUT']>
-2025-08-12 05:52:08,391 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Encoding', b'gzip'), (b'Content-Type', b'application/json'), (b'Date', b'Tue, 12 Aug 2025 00:52:13 GMT'), (b'Vary', b'accept-encoding, Origin, Access-Control-Request-Method, Access-Control-Request-Headers'), (b'Transfer-Encoding', b'chunked')])
-2025-08-12 05:52:08,392 - INFO - HTTP Request: PUT https://35f22026-33fa-458c-b77f-9ac268313032.eu-central-1-0.aws.cloud.qdrant.io:6333/collections/khapey_reviews/points?wait=true "HTTP/1.1 200 OK"
-2025-08-12 05:52:08,392 - DEBUG - receive_response_body.started request=<Request [b'PUT']>
-2025-08-12 05:52:08,392 - DEBUG - receive_response_body.complete
-2025-08-12 05:52:08,393 - DEBUG - response_closed.started
-2025-08-12 05:52:08,393 - DEBUG - response_closed.complete
-2025-08-12 05:52:08,394 - INFO - Stored review in Qdrant with point_id: 3797169b-5b08-4364-a00d-c70743794e36, is_video: True
-2025-08-12 05:52:08,394 - DEBUG - Calculating reach...
-2025-08-12 05:52:08,395 - INFO - Reach calculation - quality_score: 5.00, reputation_score: 1.73, penalty_multiplier: 1.00, initial_reach: 3.00, reach_level: Search-only (no feed distribution)
-2025-08-12 05:52:08,395 - INFO - Reach calculation completed.
-2025-08-12 05:52:08,395 - INFO - Review processing completed successfully.
-2025-08-12 05:52:08,397 - INFO - 127.0.0.1 - - [12/Aug/2025 05:52:08] "POST /process_review HTTP/1.1" 200 -
+```
+Raw response for image_id 177e8565-3524-4595-bbec-66c2204628be:
+```json
+[
+  {
+    "image_id": "177e8565-3524-4595-bbec-66c2204628be",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a double beef burger, generously topped with melted orange cheese and what appears to be diced pickles. The sesame seed bun is golden brown and slightly toasted. The burger is partially wrapped in foil, revealing its juicy patties and rich toppings. The background is blurred, showing an indoor restaurant setting with some kitchen equipment visible.",
+      "confidence": 0.9,
+      "quality": 8.0,
+      "appeal_score": 0.85
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "beef burger",
+        "confidence": 0.95
+      },
+      {
+        "name": "cheese",
+        "confidence": 0.8
+      },
+      {
+        "name": "pickles",
+        "confidence": 0.6
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "beef",
+      "juicy",
+      "cheese",
+      "fast food",
+      "sandwich",
+      "lunch",
+      "dinner"
+    ],
+    "ambience_features": [
+      "indoor dining",
+      "restaurant kitchen"
+    ],
+    "thumbnail_rank": 0.9,
+    "is_video": false
+  }
+]
+```
+==================================================
+2025-08-22 03:16:31,228 - DEBUG - Cleaned response for image_id 177e8565-3524-4595-bbec-66c2204628be:
+[
+  {
+    "image_id": "177e8565-3524-4595-bbec-66c2204628be",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a double beef burger, generously topped with melted orange cheese and what appears to be diced pickles. The sesame seed bun is golden brown and slightly toasted. The burger is partially wrapped in foil, revealing its juicy patties and rich toppings. The background is blurred, showing an indoor restaurant setting with some kitchen equipment visible.",
+      "confidence": 0.9,
+      "quality": 8.0,
+      "appeal_score": 0.85
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "beef burger",
+        "confidence": 0.95
+      },
+      {
+        "name": "cheese",
+        "confidence": 0.8
+      },
+      {
+        "name": "pickles",
+        "confidence": 0.6
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "beef",
+      "juicy",
+      "cheese",
+      "fast food",
+      "sandwich",
+      "lunch",
+      "dinner"
+    ],
+    "ambience_features": [
+      "indoor dining",
+      "restaurant kitchen"
+    ],
+    "thumbnail_rank": 0.9,
+    "is_video": false
+  }
+]
+Cleaned response for image_id 177e8565-3524-4595-bbec-66c2204628be:
+[
+  {
+    "image_id": "177e8565-3524-4595-bbec-66c2204628be",
+    "scene": "dish_closeup",
+    "visual": {
+      "description": "A close-up shot of a double beef burger, generously topped with melted orange cheese and what appears to be diced pickles. The sesame seed bun is golden brown and slightly toasted. The burger is partially wrapped in foil, revealing its juicy patties and rich toppings. The background is blurred, showing an indoor restaurant setting with some kitchen equipment visible.",
+      "confidence": 0.9,
+      "quality": 8.0,
+      "appeal_score": 0.85
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "beef burger",
+        "confidence": 0.95
+      },
+      {
+        "name": "cheese",
+        "confidence": 0.8
+      },
+      {
+        "name": "pickles",
+        "confidence": 0.6
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "burger",
+      "beef",
+      "juicy",
+      "cheese",
+      "fast food",
+      "sandwich",
+      "lunch",
+      "dinner"
+    ],
+    "ambience_features": [
+      "indoor dining",
+      "restaurant kitchen"
+    ],
+    "thumbnail_rank": 0.9,
+    "is_video": false
+  }
+]
+==================================================
+2025-08-22 03:16:31,229 - DEBUG - Generating image embedding with nomic-embed-vision-v1...
+2025-08-22 03:16:31,275 - DEBUG - Starting new HTTPS connection (1): api-atlas.nomic.ai:443
+2025-08-22 03:16:32,625 - DEBUG - https://api-atlas.nomic.ai:443 "POST /v1/embedding/image HTTP/1.1" 200 None
+2025-08-22 03:16:32,627 - DEBUG - Generated image embedding, length: 768
+2025-08-22 03:16:32,629 - DEBUG - Embedding assigned for image_id 177e8565-3524-4595-bbec-66c2204628be, length: 768, is_video: False
+2025-08-22 03:16:32,630 - DEBUG - Generating image embedding with nomic-embed-vision-v1...
+2025-08-22 03:16:32,673 - DEBUG - Starting new HTTPS connection (1): api-atlas.nomic.ai:443
+2025-08-22 03:16:33,334 - DEBUG - https://api-atlas.nomic.ai:443 "POST /v1/embedding/image HTTP/1.1" 200 None
+2025-08-22 03:16:33,335 - DEBUG - Generated image embedding, length: 768
+2025-08-22 03:16:33,338 - DEBUG - Media 2 processed successfully, quality: 8.0
+2025-08-22 03:16:33,338 - DEBUG - Processing media 3/3...
+2025-08-22 03:16:33,338 - DEBUG - Media 3 detected as image, filename: brim4.png, content_type: image/png
+2025-08-22 03:16:33,339 - DEBUG - Assigned image_id: acf7172d-84ea-4121-bfe0-a99343ac0b50
+2025-08-22 03:16:33,339 - DEBUG - Opening media for image_id: acf7172d-84ea-4121-bfe0-a99343ac0b50
+2025-08-22 03:16:33,371 - DEBUG - Image converted to JPEG for image_id: acf7172d-84ea-4121-bfe0-a99343ac0b50
+2025-08-22 03:16:33,372 - DEBUG - Prompt for image_id acf7172d-84ea-4121-bfe0-a99343ac0b50:
+Khapey-Mod v2.0 — Vision-LLM for a Pakistani Food Platform
+
+You are an expert in analyzing food-related media (images or videos) for a Pakistani restaurant review platform. Your task is to analyze the provided media and return a JSON array with one object per media file, adhering to the following schema:
+
+{
+  "image_id": string,
+  "scene": "dish_closeup" | "beverage" | "menu" | "ambiance",
+  "visual": {
+    "description": string,
+    "confidence": float,
+    "quality": float,
+    "appeal_score": float
+  },
+  "context": {
+    "ambiance": "indoor" | "outdoor" | "mixed" | "none" | "unknown",
+    "lighting": "daylight" | "warm" | "lowlight" | "mixed" | "unknown",
+    "meal_timing": "breakfast" | "lunch" | "dinner" | "tea_time" | "any" | "unknown"
+  },
+  "items": [ { "name": string, "confidence": float } ],
+  "flag_type": "none" | "low_appeal" | "poor_lighting" | "half_eaten" | "receipt" | "face" | "duplicate" | "inappropriate",
+  "penalty_score": int,
+  "keywords": [string],
+  "ambience_features": [string],
+  "thumbnail_rank": float,
+  "is_video": boolean
+}
+
+**Instructions**:
+1. **Media Analysis**:
+   - For images, analyze the entire scene.
+   - For videos, evaluate multiple keyframes (e.g., start, middle, end) to capture the overall context, prioritizing frames with food or restaurant elements.
+   - Identify food items, focusing on Pakistani cuisine (e.g., 'nihari', 'biryani', 'karahi', 'haleem', 'paratha', 'samosa', 'chai'). Include generic terms (e.g., 'curry', 'rice') only if specific Pakistani terms don’t apply.
+   - Provide a detailed `visual.description` (50-100 words) describing the dish, presentation, and setting (e.g., 'A steaming plate of chicken karahi garnished with fresh coriander, served in a traditional wok with naan on the side, in a cozy indoor setting').
+2. **Scoring**:
+   - `visual.quality` (0-10): Based on clarity, sharpness, and composition (e.g., 8 for clear, well-composed images; 3 for blurry or cluttered images).
+   - `visual.appeal_score` (0-1): Reflects visual attractiveness for food (e.g., vibrant colors, appetizing presentation).
+   - `visual.confidence` (0-1): Confidence in identifying food/restaurant context.
+   - `thumbnail_rank` (0-1): Suitability as a thumbnail (higher for vibrant, clear, food-focused media).
+   - `penalty_score` (0-100): Apply penalties for issues like half-eaten food (20), poor lighting (30), or inappropriate content (50).
+3. **Context and Keywords**:
+   - Infer `context.ambiance`, `context.lighting`, and `context.meal_timing` from visual cues (e.g., bright sunlight for 'daylight', dim warm lights for 'dinner').
+   - List `keywords` for food items, preparation styles, and ambiance (e.g., ['spicy', 'karahi', 'naan', 'cozy']).
+   - List `ambience_features` for setting details (e.g., ['wooden table', 'modern decor', 'open kitchen']).
+4. **Edge Cases**:
+   - If the media is not food-related (e.g., landscapes, people without food), return [{"not_food_related": true}].
+   - For low-quality or ambiguous media, provide best-effort analysis with lower `confidence` and `quality` scores.
+5. **Output**:
+   - Return only valid JSON with no extra text, code fences, or explanations.
+   - Exclude 'embedding' field from the output.
+   - Include `is_video` field to indicate if the media is a video.
+
+**User Context**:
+If provided, incorporate user input (e.g., description, hashtags) to refine analysis, prioritizing mentioned food items or context.
+Analyze media for image_id: acf7172d-84ea-4121-bfe0-a99343ac0b50. Use Pakistani cuisine terms (e.g., 'nihari', 'biryani', 'karahi'). User-provided context:
+User description: Best juicy beef burgers in town !
+Hashtags: #brim #juicy #beef #burgers
+Restaurant: Brim (Johar town)
+
+ User Provided review data:
+{'restaurantName': 'Brim', 'branchName': 'Johar town', 'serviceType': 'dineIn', 'totalBill': 3420.0, 'rateUserExperience': {'foodTaste': 4, 'ambience': 5, 'staff': 2, 'willRecommend': 5}, 'averageRating': 4.0, 'userThoughts': 'Best juicy beef burgers in town !', 'hashtags': ['brim', 'juicy', 'beef', 'burgers']}
+Return response in JSON format.
+2025-08-22 03:16:33,372 - DEBUG - Sending media to Gemini model for image_id: acf7172d-84ea-4121-bfe0-a99343ac0b50, mime_type: image/jpeg
+2025-08-22 03:16:36,325 - DEBUG - Received response for image_id: acf7172d-84ea-4121-bfe0-a99343ac0b50
+2025-08-22 03:16:36,326 - DEBUG - Raw Gemini response for image_id acf7172d-84ea-4121-bfe0-a99343ac0b50:
+```json
+[
+  {
+    "image_id": "acf7172d-84ea-4121-bfe0-a99343ac0b50",
+    "scene": "beverage",
+    "visual": {
+      "description": "A hand holds a clear plastic cup filled with amber-colored iced tea, labeled 'PEACHED ICE TEA' with a black peach logo and 'BRIM' below. The beverage appears refreshing with ice cubes and a white straw. In the background, a dimly lit restaurant interior features a prominent neon sign that reads 'WE SMASH IT RIGHT'. Several packets of condiments and a white napkin with the 'BRIM' logo are visible on the table, suggesting a casual dining experience.",
+      "confidence": 0.9,
+      "quality": 7.5,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "iced tea",
+        "confidence": 0.95
+      },
+      {
+        "name": "burger",
+        "confidence": 0.7
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "iced tea",
+      "peach",
+      "refreshing",
+      "casual dining",
+      "neon sign",
+      "burger",
+      "condiments"
+    ],
+    "ambience_features": [
+      "neon sign",
+      "modern interior",
+      "casual seating"
+    ],
+    "thumbnail_rank": 0.7,
+    "is_video": false
+  }
+]
+```
+Raw response for image_id acf7172d-84ea-4121-bfe0-a99343ac0b50:
+```json
+[
+  {
+    "image_id": "acf7172d-84ea-4121-bfe0-a99343ac0b50",
+    "scene": "beverage",
+    "visual": {
+      "description": "A hand holds a clear plastic cup filled with amber-colored iced tea, labeled 'PEACHED ICE TEA' with a black peach logo and 'BRIM' below. The beverage appears refreshing with ice cubes and a white straw. In the background, a dimly lit restaurant interior features a prominent neon sign that reads 'WE SMASH IT RIGHT'. Several packets of condiments and a white napkin with the 'BRIM' logo are visible on the table, suggesting a casual dining experience.",
+      "confidence": 0.9,
+      "quality": 7.5,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "iced tea",
+        "confidence": 0.95
+      },
+      {
+        "name": "burger",
+        "confidence": 0.7
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "iced tea",
+      "peach",
+      "refreshing",
+      "casual dining",
+      "neon sign",
+      "burger",
+      "condiments"
+    ],
+    "ambience_features": [
+      "neon sign",
+      "modern interior",
+      "casual seating"
+    ],
+    "thumbnail_rank": 0.7,
+    "is_video": false
+  }
+]
+```
+==================================================
+2025-08-22 03:16:36,326 - DEBUG - Cleaned response for image_id acf7172d-84ea-4121-bfe0-a99343ac0b50:
+[
+  {
+    "image_id": "acf7172d-84ea-4121-bfe0-a99343ac0b50",
+    "scene": "beverage",
+    "visual": {
+      "description": "A hand holds a clear plastic cup filled with amber-colored iced tea, labeled 'PEACHED ICE TEA' with a black peach logo and 'BRIM' below. The beverage appears refreshing with ice cubes and a white straw. In the background, a dimly lit restaurant interior features a prominent neon sign that reads 'WE SMASH IT RIGHT'. Several packets of condiments and a white napkin with the 'BRIM' logo are visible on the table, suggesting a casual dining experience.",
+      "confidence": 0.9,
+      "quality": 7.5,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "iced tea",
+        "confidence": 0.95
+      },
+      {
+        "name": "burger",
+        "confidence": 0.7
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "iced tea",
+      "peach",
+      "refreshing",
+      "casual dining",
+      "neon sign",
+      "burger",
+      "condiments"
+    ],
+    "ambience_features": [
+      "neon sign",
+      "modern interior",
+      "casual seating"
+    ],
+    "thumbnail_rank": 0.7,
+    "is_video": false
+  }
+]
+Cleaned response for image_id acf7172d-84ea-4121-bfe0-a99343ac0b50:
+[
+  {
+    "image_id": "acf7172d-84ea-4121-bfe0-a99343ac0b50",
+    "scene": "beverage",
+    "visual": {
+      "description": "A hand holds a clear plastic cup filled with amber-colored iced tea, labeled 'PEACHED ICE TEA' with a black peach logo and 'BRIM' below. The beverage appears refreshing with ice cubes and a white straw. In the background, a dimly lit restaurant interior features a prominent neon sign that reads 'WE SMASH IT RIGHT'. Several packets of condiments and a white napkin with the 'BRIM' logo are visible on the table, suggesting a casual dining experience.",
+      "confidence": 0.9,
+      "quality": 7.5,
+      "appeal_score": 0.7
+    },
+    "context": {
+      "ambiance": "indoor",
+      "lighting": "warm",
+      "meal_timing": "any"
+    },
+    "items": [
+      {
+        "name": "iced tea",
+        "confidence": 0.95
+      },
+      {
+        "name": "burger",
+        "confidence": 0.7
+      }
+    ],
+    "flag_type": "none",
+    "penalty_score": 0,
+    "keywords": [
+      "iced tea",
+      "peach",
+      "refreshing",
+      "casual dining",
+      "neon sign",
+      "burger",
+      "condiments"
+    ],
+    "ambience_features": [
+      "neon sign",
+      "modern interior",
+      "casual seating"
+    ],
+    "thumbnail_rank": 0.7,
+    "is_video": false
+  }
+]
+==================================================
+2025-08-22 03:16:36,328 - DEBUG - Generating image embedding with nomic-embed-vision-v1...
+2025-08-22 03:16:36,370 - DEBUG - Starting new HTTPS connection (1): api-atlas.nomic.ai:443
+2025-08-22 03:16:37,060 - DEBUG - https://api-atlas.nomic.ai:443 "POST /v1/embedding/image HTTP/1.1" 200 None
+2025-08-22 03:16:37,062 - DEBUG - Generated image embedding, length: 768
+2025-08-22 03:16:37,064 - DEBUG - Embedding assigned for image_id acf7172d-84ea-4121-bfe0-a99343ac0b50, length: 768, is_video: False
+2025-08-22 03:16:37,067 - DEBUG - Generating image embedding with nomic-embed-vision-v1...
+2025-08-22 03:16:37,109 - DEBUG - Starting new HTTPS connection (1): api-atlas.nomic.ai:443
+2025-08-22 03:16:38,074 - DEBUG - https://api-atlas.nomic.ai:443 "POST /v1/embedding/image HTTP/1.1" 200 None
+2025-08-22 03:16:38,075 - DEBUG - Generated image embedding, length: 768
+2025-08-22 03:16:38,078 - DEBUG - Media 3 processed successfully, quality: 7.5
+2025-08-22 03:16:38,078 - INFO - Aggregated quality_score: 8.00
+2025-08-22 03:16:38,082 - DEBUG - close.started
+2025-08-22 03:16:38,082 - DEBUG - close.complete
+2025-08-22 03:16:38,082 - DEBUG - connect_tcp.started host='35f22026-33fa-458c-b77f-9ac268313032.eu-central-1-0.aws.cloud.qdrant.io' port=6333 local_address=None timeout=5.0 socket_options=None
+2025-08-22 03:16:38,257 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000021E5DD38490>
+2025-08-22 03:16:38,257 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x0000021E5BC1F9B0> server_hostname='35f22026-33fa-458c-b77f-9ac268313032.eu-central-1-0.aws.cloud.qdrant.io' timeout=5.0
+2025-08-22 03:16:38,412 - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000021E5DD38C50>
+2025-08-22 03:16:38,412 - DEBUG - send_request_headers.started request=<Request [b'PUT']>
+2025-08-22 03:16:38,412 - DEBUG - send_request_headers.complete
+2025-08-22 03:16:38,412 - DEBUG - send_request_body.started request=<Request [b'PUT']>
+2025-08-22 03:16:39,470 - DEBUG - send_request_body.complete
+2025-08-22 03:16:39,470 - DEBUG - receive_response_headers.started request=<Request [b'PUT']>
+2025-08-22 03:16:39,875 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Encoding', b'gzip'), (b'Content-Type', b'application/json'), (b'Date', b'Thu, 21 Aug 2025 22:16:42 GMT'), (b'Vary', b'accept-encoding, Origin, Access-Control-Request-Method, Access-Control-Request-Headers'), (b'Transfer-Encoding', b'chunked')])
+2025-08-22 03:16:39,876 - INFO - HTTP Request: PUT https://35f22026-33fa-458c-b77f-9ac268313032.eu-central-1-0.aws.cloud.qdrant.io:6333/collections/khapey_reviews/points?wait=true "HTTP/1.1 200 OK"
+2025-08-22 03:16:39,876 - DEBUG - receive_response_body.started request=<Request [b'PUT']>
+2025-08-22 03:16:39,877 - DEBUG - receive_response_body.complete
+2025-08-22 03:16:39,877 - DEBUG - response_closed.started
+2025-08-22 03:16:39,877 - DEBUG - response_closed.complete
+2025-08-22 03:16:39,877 - INFO - Stored review in Qdrant with point_id: cab5e707-2ec9-47c8-8e83-d36255626e37, is_video: False
+2025-08-22 03:16:39,878 - DEBUG - Calculating reach...
+2025-08-22 03:16:39,878 - INFO - Reach calculation - quality_score: 8.00, reputation_score: 1.83, penalty_multiplier: 1.00, initial_reach: 4.80, reach_level: Search-only (no feed distribution)
+2025-08-22 03:16:39,878 - INFO - Reach calculation completed.
+2025-08-22 03:16:39,878 - INFO - Review processing completed successfully.
+2025-08-22 03:16:39,882 - INFO - 127.0.0.1 - - [22/Aug/2025 03:16:39] "POST /process_review HTTP/1.1" 200 -
+2025-08-22 03:18:51,994 - DEBUG - close.started
+2025-08-22 03:18:51,995 - DEBUG - close.complete
