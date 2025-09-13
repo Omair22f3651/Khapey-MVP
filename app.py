@@ -1,4 +1,3 @@
-
 from flask import Flask, request, render_template, jsonify
 import json
 import os
@@ -18,6 +17,7 @@ from uuid import uuid4
 import logging
 import cv2
 import tempfile
+import requests
 
 # Configure logging
 logging.basicConfig(filename='response_debug.log', level=logging.DEBUG, 
@@ -193,17 +193,26 @@ class KhapeyMVP:
 
             # Append user input to prompt
             user_context = ""
+            user_thoughts = ""
+            hashtags = []
+            restaurant_name = ""
+            branch_name = ""
             if review_data:
+                print(review_data)
                 user_thoughts = review_data.get("userThoughts", "")
                 hashtags = review_data.get("hashtags", [])
-                if user_thoughts:
-                    user_context += f"User description: {user_thoughts}\n"
-                if hashtags:
-                    user_context += f"Hashtags: {' '.join(f'#{tag}' for tag in hashtags)}\n"
+                restaurant_name = review_data.get("restaurantName", "")
+                branch_name = review_data.get("branchName", "")
+            if user_thoughts:
+                user_context += f"User description: {user_thoughts}\n"
+            if hashtags:
+                user_context += f"Hashtags: {' '.join(f'#{tag}' for tag in hashtags)}\n"
+            if restaurant_name or branch_name:
+                user_context += f"Restaurant: {restaurant_name} ({branch_name})\n"
             prompt = (
                 PRODUCTION_PROMPT +
-                f"\nGenerate analysis for image_id: {image_id}. Ensure Pakistani cuisine terms are used (e.g., 'nihari', 'biryani'). "
-                f"Use the following user-provided context to enhance analysis:\n{user_context}Return response in JSON format."
+                f"\nAnalyze media for image_id: {image_id}. Use Pakistani cuisine terms (e.g., 'nihari', 'biryani', 'karahi'). "
+                f"User-provided context:\n{user_context}\n User Provided review data:\n{review_data}\nReturn response in JSON format."
             )
             logging.debug(f"Prompt for image_id {image_id}:\n{prompt}")
             print(f"INFO: Prepared prompt for image_id {image_id} with user context.")
@@ -449,7 +458,10 @@ class KhapeyMVP:
                 "userThoughts": review_data.get("userThoughts"),
                 "hashtags": review_data.get("hashtags"),
                 "location": {"lat": 0.0, "lon": 0.0},
-                "images": image_base64_list
+                "images": image_base64_list,
+                "mongodb_id": review_data.get("mongodb_id"),
+                "user_id": review_data.get("user_id"),
+                "user_email": review_data.get("user_email")
             }
             point = PointStruct(
                 id=str(uuid4()),
@@ -460,7 +472,7 @@ class KhapeyMVP:
                 collection_name="khapey_reviews",
                 points=[point]
             )
-            logging.info(f"Stored review in Qdrant with point_id: {point.id}, is_video: {any(a.get('is_video', False) for a in analyses)}")
+            logging.info(f"Stored review in Qdrant with point_id: {point.id}, is_video: {any(a.get('is_video', False) for a in analyses)}, mongodb_id: {review_data.get('mongodb_id')}")
             print(f"INFO: Stored review in Qdrant with point_id: {point.id}")
         except Exception as e:
             logging.error(f"Error storing review in Qdrant: {str(e)}")
@@ -713,44 +725,32 @@ def index():
 @app.route('/process_review', methods=['POST'])
 def process_review():
     try:
-        restaurant_name = request.form.get('restaurant_name', 'Karachi Darbar')
-        branch_name = request.form.get('branch_name', 'DHA Branch')
-        service_type = request.form.get('service_type', 'dineIn')
-        total_bill = float(request.form.get('total_bill', 1500))
-        food_taste = int(request.form.get('food_taste', 4))
-        ambience = int(request.form.get('ambience', 4))
-        staff = int(request.form.get('staff', 3))
-        will_recommend = int(request.form.get('will_recommend', 4))
-        user_thoughts = request.form.get('user_thoughts', 'Amazing chicken karahi with perfect spice level!')
-        hashtags = request.form.get('hashtags', '#karahi #spicy #family').split()
-        media_files = request.files.getlist('media')
+        review_data = json.loads(request.form.get('review_data', '{}'))
+        media_urls = review_data.get('mediaUrls', [])
+        mongodb_id = review_data.get('mongodb_id', '')
+        user_id = review_data.get('user_id', '')
+        user_email = review_data.get('user_email', '')
 
-        review_data = {
-            "restaurantName": restaurant_name,
-            "branchName": branch_name,
-            "serviceType": service_type,
-            "totalBill": total_bill,
-            "rateUserExperience": {
-                "foodTaste": food_taste,
-                "ambience": ambience,
-                "staff": staff,
-                "willRecommend": will_recommend
-            },
-            "averageRating": (food_taste + ambience + staff + will_recommend) / 4,
-            "userThoughts": user_thoughts,
-            "hashtags": [tag.replace("#", "") for tag in hashtags if tag.strip()]
-        }
-        logging.debug(f"Review data prepared: {json.dumps(review_data, indent=2)}")
-        print(f"INFO: Review data prepared: {review_data}")
+        media_files = []
+        for media in media_urls:
+            response = requests.get(media['url'], stream=True, timeout=30)
+            response.raise_for_status()
+            file_stream = io.BytesIO(response.content)
+            file_stream.filename = media['url'].split('/')[-1]
+            file_stream.content_type = media['mediaType']
+            media_files.append(file_stream)
 
         if not media_files:
-            logging.warning("No media files uploaded for review.")
-            print("WARN: No media files uploaded for review.")
-            return jsonify({"success": False, "error": "At least one media file (image or video) is required"}), 400
+            logging.warning("No media files downloaded.")
+            return jsonify({"success": False, "error": "At least one media file is required"}), 400
 
-        results = mvp.analyze_review(media_files, review_data)
+        results = mvp.analyze_review(media_files, {
+            **review_data,
+            'mongodb_id': mongodb_id,
+            'user_id': user_id,
+            'user_email': user_email
+        })
         logging.info("Review processing completed successfully.")
-        print("INFO: Review processing completed successfully.")
         return jsonify({
             "success": True,
             "results": results,
@@ -758,7 +758,6 @@ def process_review():
         })
     except Exception as e:
         logging.error(f"Error processing review: {str(e)}", exc_info=True)
-        print(f"ERROR: Error processing review: {str(e)}")
         return jsonify({"success": False, "error": f"Failed to process review: {str(e)}"}), 500
 
 @app.route('/search', methods=['POST'])
